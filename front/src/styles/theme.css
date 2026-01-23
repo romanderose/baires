@@ -194,4 +194,8 @@
       width: 100%;
     }
   }
+
+  .animate-progress {
+    animation: fillProgress 5s linear forwards;
+  }
 }

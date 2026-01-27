@@ -21,11 +21,12 @@ export function MainMenu() {
       <div className="hidden lg:block">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Logo centrado */}
-          <div className="flex justify-center py-6">
+          <div className="flex justify-center py-4">
             <img
               src={logoImage}
               alt="Baires Suspensión"
-              className="h-24 w-auto object-contain"
+              className="object-contain"
+              style={{ height: '176px', width: 'auto' }}
             />
           </div>
 
@@ -35,7 +36,31 @@ export function MainMenu() {
               <a
                 key={item.name}
                 href={item.href}
-                className="px-6 py-2 text-white text-sm font-medium hover:bg-white/10 transition-colors rounded"
+                className="px-6 py-2 text-white font-medium italic transition-all rounded"
+                style={{
+                  color: 'white',
+                  textShadow: 'none',
+                  WebkitTextStroke: '0',
+                  fontFamily: 'Arial, sans-serif',
+                  fontStyle: 'italic',
+                  fontSize: '1.75rem'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.color = 'rgb(255, 0, 0)';
+                  e.currentTarget.style.textShadow = '0 0 6px white, 0 0 10px white';
+                  e.currentTarget.style.webkitTextStroke = '1px black';
+                  e.currentTarget.style.transform = 'scale(1.15)';
+                  e.currentTarget.style.fontFamily = 'Arial, sans-serif';
+                  e.currentTarget.style.fontStyle = 'italic';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.color = 'white';
+                  e.currentTarget.style.textShadow = 'none';
+                  e.currentTarget.style.webkitTextStroke = '0';
+                  e.currentTarget.style.transform = 'scale(1)';
+                  e.currentTarget.style.fontFamily = 'Arial, sans-serif';
+                  e.currentTarget.style.fontStyle = 'italic';
+                }}
               >
                 {item.name}
               </a>
@@ -52,7 +77,8 @@ export function MainMenu() {
             <img
               src={logoImage}
               alt="Baires Suspensión"
-              className="h-16 w-auto object-contain"
+              className="object-contain"
+              style={{ height: '144px', width: 'auto' }}
             />
           </div>
 
@@ -77,7 +103,33 @@ export function MainMenu() {
                 <a
                   key={item.name}
                   href={item.href}
-                  className="block px-3 py-3 text-white text-sm font-medium hover:bg-white/10 rounded transition-colors"
+                  className="block px-3 py-3 text-white font-medium italic transition-all rounded"
+                  style={{
+                    color: 'white',
+                    textShadow: 'none',
+                    WebkitTextStroke: '0',
+                    fontFamily: 'Arial, sans-serif',
+                    fontStyle: 'italic',
+                    fontSize: '1.75rem'
+                  }}
+                  onTouchStart={(e) => {
+                    e.currentTarget.style.color = 'rgb(255, 0, 0)';
+                    e.currentTarget.style.textShadow = '0 0 6px white, 0 0 10px white';
+                    e.currentTarget.style.webkitTextStroke = '1px black';
+                    e.currentTarget.style.transform = 'scale(1.15)';
+                    e.currentTarget.style.fontFamily = 'Arial, sans-serif';
+                    e.currentTarget.style.fontStyle = 'italic';
+                  }}
+                  onTouchEnd={(e) => {
+                    setTimeout(() => {
+                      e.currentTarget.style.color = 'white';
+                      e.currentTarget.style.textShadow = 'none';
+                      e.currentTarget.style.webkitTextStroke = '0';
+                      e.currentTarget.style.transform = 'scale(1)';
+                      e.currentTarget.style.fontFamily = 'Arial, sans-serif';
+                      e.currentTarget.style.fontStyle = 'italic';
+                    }, 200);
+                  }}
                 >
                   {item.name}
                 </a>

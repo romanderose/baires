@@ -41,11 +41,17 @@ export function Footer() {
           {/* Columna de Ubicación */}
           <div>
             <h3 className="text-2xl font-bold text-white mb-4">Ubicación:</h3>
-            <div className="w-full aspect-[4/3] bg-white">
-              {/* Contenedor listo para iframe */}
-              <div className="w-full h-full flex items-center justify-center text-gray-400">
-                {/* El iframe se insertará aquí */}
-              </div>
+            <p className="text-white text-base mb-3">📍 Av. Hipólito Irigoyen 1099, Morón</p>
+            <div className="w-full md:w-[85%] bg-white" style={{ height: '180px' }}>
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3281.778023451527!2d-58.6267569251433!3d-34.660308460487514!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc7dfdf245937%3A0x5dad6c88c72a1663!2sBaires%20Suspensi%C3%B3n!5e0!3m2!1ses!2sar!4v1769465888745!5m2!1ses!2sar"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
           </div>
         </div>

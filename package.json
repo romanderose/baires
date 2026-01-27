@@ -1,0 +1,10 @@
+{
+    "name": "baires-root",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "dev": "npm --prefix front run dev",
+        "build": "npm --prefix front run build",
+        "install:front": "npm install --prefix front"
+    }
+}

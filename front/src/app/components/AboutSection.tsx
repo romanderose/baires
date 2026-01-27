@@ -1,7 +1,7 @@
 export function AboutSection() {
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-      <h2 className="text-3xl font-bold mb-6 text-gray-800">Sobre nosotros</h2>
+    <section className="max-w-7xl mx-auto py-12" style={{ paddingLeft: 'calc(1rem + 20px)', paddingRight: '1rem' }}>
+      <h2 className="text-3xl font-bold mb-6 text-gray-800 italic" style={{ fontFamily: 'Arial, sans-serif', fontStyle: 'italic', marginLeft: '80px' }}>Sobre nosotros</h2>
       <p className="text-gray-700 leading-relaxed">
         Baires Suspensión es una empresa dedicada a la venta de repuestos automotrices con más de 20 años de experiencia en el mercado.
         Nos especializamos en suspensión, frenos, embragues y distribución para toda la línea del automotor.

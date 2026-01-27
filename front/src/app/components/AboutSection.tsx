@@ -1,8 +1,28 @@
+import { useTheme } from "@/app/contexts/ThemeContext";
+
 export function AboutSection() {
+  const { theme } = useTheme();
+
   return (
-    <section className="max-w-7xl mx-auto py-12" style={{ paddingLeft: 'calc(1rem + 20px)', paddingRight: '1rem' }}>
-      <h2 className="text-3xl font-bold mb-6 text-gray-800 italic" style={{ fontFamily: 'Arial, sans-serif', fontStyle: 'italic', marginLeft: '80px' }}>Sobre nosotros</h2>
-      <p className="text-gray-700 leading-relaxed">
+    <section id="productos" className="max-w-7xl mx-auto py-12" style={{ paddingLeft: 'calc(1rem + 20px)', paddingRight: '1rem' }}>
+      <h2
+        className="text-3xl font-bold mb-6 italic"
+        style={{
+          fontStyle: 'italic',
+          marginLeft: '30px',
+          color: theme === 'dark' ? 'white' : 'rgb(55, 65, 81)'
+        }}
+      >
+        Sobre nosotros
+      </h2>
+      <p
+        className="leading-relaxed"
+        style={{
+          marginLeft: '15px',
+          marginRight: '15px',
+          color: theme === 'dark' ? 'rgb(209, 213, 219)' : 'rgb(55, 65, 81)'
+        }}
+      >
         Baires Suspensión es una empresa dedicada a la venta de repuestos automotrices con más de 20 años de experiencia en el mercado.
         Nos especializamos en suspensión, frenos, embragues y distribución para toda la línea del automotor.
         Contamos con un amplio stock de productos de las mejores marcas nacionales e importadas, garantizando calidad y confiabilidad en cada compra.

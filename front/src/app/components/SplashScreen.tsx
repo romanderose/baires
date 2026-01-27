@@ -1,4 +1,4 @@
-import logoImage from "../../assets/5fb27b37a0b4968dac2d7246feac7e827a3958f1.png";
+import logoImage from "@/assets/5fb27b37a0b4968dac2d7246feac7e827a3958f1.png";
 
 export function SplashScreen() {
   return (

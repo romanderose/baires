@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import bairesSuspensionImg from "../../assets/5bf6c10c6d44ed2eaf54f59590268558098c0f87.png";
-import arrowIcon from "../../assets/18d4bb9bdaefa75f46d6589fef8388d2235a378c.png";
+import bairesSuspensionImg from "@/assets/5bf6c10c6d44ed2eaf54f59590268558098c0f87.png";
+import arrowIcon from "@/assets/18d4bb9bdaefa75f46d6589fef8388d2235a378c.png";
+import { useTheme } from "@/app/contexts/ThemeContext";
 
 export function Slider() {
+  const { theme } = useTheme();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [direction, setDirection] = useState<"left" | "right">("right");
@@ -16,6 +18,7 @@ export function Slider() {
   const touchEndX = useRef<number>(0);
 
   const nextSlide = () => {
+    if (isTransitioning) return;
     setDirection("right");
     setIsTransitioning(true);
     setTimeout(() => {
@@ -25,10 +28,21 @@ export function Slider() {
   };
 
   const prevSlide = () => {
+    if (isTransitioning) return;
     setDirection("left");
     setIsTransitioning(true);
     setTimeout(() => {
       setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+      setIsTransitioning(false);
+    }, 300);
+  };
+
+  const goToSlide = (index: number) => {
+    if (isTransitioning || index === currentSlide) return;
+    setDirection(index > currentSlide ? "right" : "left");
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentSlide(index);
       setIsTransitioning(false);
     }, 300);
   };
@@ -68,7 +82,7 @@ export function Slider() {
       <div
         className="relative mx-auto h-96 flex items-center justify-center overflow-hidden rounded-[5px] border-2 border-red-600"
         style={{
-          backgroundColor: "rgb(7, 21, 77)",
+          backgroundColor: theme === 'light' ? 'rgb(7, 21, 77)' : 'rgb(7, 21, 77)',
           maxWidth: "800px"
         }}
         onTouchStart={handleTouchStart}
@@ -131,9 +145,13 @@ export function Slider() {
             {slides.map((_, index) => (
               <button
                 key={index}
-                onClick={() => setCurrentSlide(index)}
-                className={`w-3 h-3 rounded-full transition-colors ${index === currentSlide ? "bg-white" : "bg-white/50"
-                  }`}
+                onClick={() => goToSlide(index)}
+                className="w-3 h-3 rounded-full transition-colors"
+                style={{
+                  backgroundColor: index === currentSlide
+                    ? (theme === 'dark' ? 'rgb(0, 161, 255)' : 'white')
+                    : (theme === 'dark' ? 'rgba(0, 161, 255, 0.5)' : 'rgba(255, 255, 255, 0.5)')
+                }}
               />
             ))}
           </div>

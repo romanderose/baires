@@ -71,27 +71,23 @@ export function Footer() {
                 href="https://web.whatsapp.com/send?phone=+541124058024"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-base cursor-pointer transition-all duration-300"
+                className="flex items-center gap-2 text-base cursor-pointer transition-colors duration-300"
                 style={{ 
                   color: theme === 'dark' ? 'rgb(209, 213, 219)' : 'white',
                   textDecoration: 'none'
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.color = 'rgb(37, 211, 102)';
-                  e.currentTarget.style.transform = 'translateX(10px) scale(1.15)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.color = theme === 'dark' ? 'rgb(209, 213, 219)' : 'white';
-                  e.currentTarget.style.transform = 'translateX(0) scale(1)';
                 }}
                 onTouchStart={(e) => {
                   e.currentTarget.style.color = 'rgb(37, 211, 102)';
-                  e.currentTarget.style.transform = 'translateX(10px) scale(1.15)';
                 }}
                 onTouchEnd={(e) => {
                   setTimeout(() => {
                     e.currentTarget.style.color = theme === 'dark' ? 'rgb(209, 213, 219)' : 'white';
-                    e.currentTarget.style.transform = 'translateX(0) scale(1)';
                   }, 200);
                 }}
               >
@@ -106,27 +102,23 @@ export function Footer() {
                 href="https://www.facebook.com/bairessuspension"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-base cursor-pointer transition-all duration-300"
+                className="flex items-center gap-2 text-base cursor-pointer transition-colors duration-300"
                 style={{ 
                   color: theme === 'dark' ? 'rgb(209, 213, 219)' : 'white',
                   textDecoration: 'none'
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.color = 'rgb(66, 133, 244)';
-                  e.currentTarget.style.transform = 'translateX(10px) scale(1.15)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.color = theme === 'dark' ? 'rgb(209, 213, 219)' : 'white';
-                  e.currentTarget.style.transform = 'translateX(0) scale(1)';
                 }}
                 onTouchStart={(e) => {
                   e.currentTarget.style.color = 'rgb(66, 133, 244)';
-                  e.currentTarget.style.transform = 'translateX(10px) scale(1.15)';
                 }}
                 onTouchEnd={(e) => {
                   setTimeout(() => {
                     e.currentTarget.style.color = theme === 'dark' ? 'rgb(209, 213, 219)' : 'white';
-                    e.currentTarget.style.transform = 'translateX(0) scale(1)';
                   }, 200);
                 }}
               >
@@ -141,27 +133,23 @@ export function Footer() {
                 href="https://instagram.com/bairessuspension"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-base cursor-pointer transition-all duration-300"
+                className="flex items-center gap-2 text-base cursor-pointer transition-colors duration-300"
                 style={{ 
                   color: theme === 'dark' ? 'rgb(209, 213, 219)' : 'white',
                   textDecoration: 'none'
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.color = 'rgb(253, 29, 29)';
-                  e.currentTarget.style.transform = 'translateX(10px) scale(1.15)';
                 }}
                 onMouseLeave={(e) => {
                   e.currentTarget.style.color = theme === 'dark' ? 'rgb(209, 213, 219)' : 'white';
-                  e.currentTarget.style.transform = 'translateX(0) scale(1)';
                 }}
                 onTouchStart={(e) => {
                   e.currentTarget.style.color = 'rgb(253, 29, 29)';
-                  e.currentTarget.style.transform = 'translateX(10px) scale(1.15)';
                 }}
                 onTouchEnd={(e) => {
                   setTimeout(() => {
                     e.currentTarget.style.color = theme === 'dark' ? 'rgb(209, 213, 219)' : 'white';
-                    e.currentTarget.style.transform = 'translateX(0) scale(1)';
                   }, 200);
                 }}
               >

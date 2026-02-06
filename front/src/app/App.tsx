@@ -3,6 +3,7 @@ import { SplashScreen } from "@/app/components/SplashScreen";
 import { MainMenu } from "@/app/components/MainMenu";
 import { Slider } from "@/app/components/Slider";
 import { AboutSection } from "@/app/components/AboutSection";
+import { BrandsSection } from "@/app/components/BrandsSection";
 import { Footer } from "@/app/components/Footer";
 import { ThemeProvider, useTheme } from "@/app/contexts/ThemeContext";
 
@@ -50,6 +51,7 @@ function MainContent() {
         >
           <Slider />
           <AboutSection />
+          <BrandsSection />
         </div>
         <Footer />
       </div>

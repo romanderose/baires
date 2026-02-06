@@ -1,8 +1,8 @@
 import { useState, useEffect, useRef } from "react";
-import bairesSuspensionImg from "@/assets/5bf6c10c6d44ed2eaf54f59590268558098c0f87.png";
-import slide0 from "@/assets/66e8b84fb314765066841889c850d5e1d11c1a1b.png";
-import slide1 from "@/assets/29712f74a219f710fecb4ac2537000e9938811a9.png";
-import slide2 from "@/assets/1eb440ed301910faea874f4a8802844ecc23ecc5.png";
+import bairesSuspensionImg from "@/assets/f982c9b352a882c04c0b942189a1e67009400f7d.png";
+import slide0 from "@/assets/03818d9729ea90fbf4fb8f9f6cb20d51a717475a.png";
+import slide1 from "@/assets/d4389a8ed19bafede7466af23b89d3b4676b7e36.png";
+import slide2 from "@/assets/9b6c62cb0afdc6050e488cea7e360b8a8ab03593.png";
 import arrowIcon from "@/assets/18d4bb9bdaefa75f46d6589fef8388d2235a378c.png";
 import { useTheme } from "@/app/contexts/ThemeContext";
 

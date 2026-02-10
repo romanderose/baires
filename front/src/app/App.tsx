@@ -4,28 +4,36 @@ import { MainMenu } from "@/app/components/MainMenu";
 import { Slider } from "@/app/components/Slider";
 import { AboutSection } from "@/app/components/AboutSection";
 import { BrandsSection } from "@/app/components/BrandsSection";
+import { ContactSection } from "@/app/components/ContactSection";
+import { SearchResults } from "@/app/components/SearchResults";
 import { Footer } from "@/app/components/Footer";
 import { ThemeProvider, useTheme } from "@/app/contexts/ThemeContext";
 
 function MainContent() {
-  const [showSplash, setShowSplash] = useState(true);
   const { theme } = useTheme();
 
+  // Leer parámetro de búsqueda de la URL
+  const searchParams = new URLSearchParams(window.location.search);
+  const searchTerm = searchParams.get('search') || '';
+
+  // Mostrar splash solo si NO hay búsqueda
+  const [showSplash, setShowSplash] = useState(!searchTerm);
+
   useEffect(() => {
-    if (showSplash) {
+    if (showSplash && !searchTerm) {
       const timer = setTimeout(() => {
         setShowSplash(false);
       }, 5000); // 5 segundos
 
       return () => clearTimeout(timer);
     }
-  }, [showSplash]);
+  }, [showSplash, searchTerm]);
 
   const resetToHome = () => {
-    setShowSplash(true);
+    window.location.href = '/';
   };
 
-  if (showSplash) {
+  if (showSplash && !searchTerm) {
     return <SplashScreen />;
   }
 
@@ -49,9 +57,16 @@ function MainContent() {
             backgroundColor: theme === 'dark' ? 'rgb(20, 45, 110)' : 'rgb(0, 161, 255)'
           }}
         >
-          <Slider />
-          <AboutSection />
-          <BrandsSection />
+          {searchTerm ? (
+            <SearchResults searchTerm={searchTerm} />
+          ) : (
+            <>
+              <Slider />
+              <AboutSection />
+              <BrandsSection />
+              <ContactSection />
+            </>
+          )}
         </div>
         <Footer />
       </div>

@@ -26,6 +26,7 @@ const SearchIcon = ({ style }: { style?: React.CSSProperties }) => (
 export function MainMenu({ onLogoClick }: { onLogoClick: () => void }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
   const { theme, toggleTheme } = useTheme();
 
   const menuItems = [
@@ -34,6 +35,12 @@ export function MainMenu({ onLogoClick }: { onLogoClick: () => void }) {
     { name: "Embragues", href: "#" },
     { name: "Distribución", href: "#" },
   ];
+
+  const handleSearch = () => {
+    if (searchTerm.trim() !== "") {
+      window.location.href = `?search=${encodeURIComponent(searchTerm)}`;
+    }
+  };
 
   return (
     <nav
@@ -103,6 +110,13 @@ export function MainMenu({ onLogoClick }: { onLogoClick: () => void }) {
               <input
                 type="text"
                 placeholder="¿Qué está buscando?"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    handleSearch();
+                  }
+                }}
                 style={{
                   backgroundColor: 'white',
                   border: '1px solid rgb(200, 200, 200)',
@@ -114,6 +128,7 @@ export function MainMenu({ onLogoClick }: { onLogoClick: () => void }) {
                 }}
               />
               <button
+                onClick={handleSearch}
                 style={{
                   backgroundColor: 'rgb(200, 200, 200)',
                   transform: 'skewX(-10deg)',
@@ -126,6 +141,13 @@ export function MainMenu({ onLogoClick }: { onLogoClick: () => void }) {
                   borderRadius: '4px',
                   cursor: 'pointer',
                   flexShrink: '0',
+                  transition: 'opacity 0.2s ease',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.opacity = '0.8';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.opacity = '1';
                 }}
               >
                 <SearchIcon style={{ color: 'black', width: '20px', height: '20px' }} />
@@ -276,6 +298,13 @@ export function MainMenu({ onLogoClick }: { onLogoClick: () => void }) {
                     <input
                       type="text"
                       placeholder="¿Qué está buscando?"
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          handleSearch();
+                        }
+                      }}
                       style={{
                         backgroundColor: 'white',
                         border: '1px solid rgb(200, 200, 200)',
@@ -287,6 +316,7 @@ export function MainMenu({ onLogoClick }: { onLogoClick: () => void }) {
                       }}
                     />
                     <button
+                      onClick={handleSearch}
                       style={{
                         backgroundColor: 'rgb(200, 200, 200)',
                         transform: 'skewX(-10deg)',
@@ -299,6 +329,13 @@ export function MainMenu({ onLogoClick }: { onLogoClick: () => void }) {
                         borderRadius: '4px',
                         cursor: 'pointer',
                         flexShrink: '0',
+                        transition: 'opacity 0.2s ease',
+                      }}
+                      onTouchStart={(e) => {
+                        e.currentTarget.style.opacity = '0.8';
+                      }}
+                      onTouchEnd={(e) => {
+                        e.currentTarget.style.opacity = '1';
                       }}
                     >
                       <SearchIcon style={{ color: 'black', width: '20px', height: '20px' }} />

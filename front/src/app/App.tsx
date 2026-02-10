@@ -6,6 +6,9 @@ import { AboutSection } from "@/app/components/AboutSection";
 import { BrandsSection } from "@/app/components/BrandsSection";
 import { ContactSection } from "@/app/components/ContactSection";
 import { SearchResults } from "@/app/components/SearchResults";
+import { ProductsSection } from "@/app/components/ProductsSection";
+import { ProductDetails } from "@/app/components/ProductDetails";
+import { CategorySection } from "@/app/components/CategorySection";
 import { Footer } from "@/app/components/Footer";
 import { ThemeProvider, useTheme } from "@/app/contexts/ThemeContext";
 
@@ -15,6 +18,11 @@ function MainContent() {
   // Leer parámetro de búsqueda de la URL
   const searchParams = new URLSearchParams(window.location.search);
   const searchTerm = searchParams.get('search') || '';
+
+  // Estado de navegación
+  const [currentSection, setCurrentSection] = useState<string>('home');
+  const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
+  const [previousSection, setPreviousSection] = useState<string>('home');
 
   // Mostrar splash solo si NO hay búsqueda
   const [showSplash, setShowSplash] = useState(!searchTerm);
@@ -30,7 +38,25 @@ function MainContent() {
   }, [showSplash, searchTerm]);
 
   const resetToHome = () => {
-    window.location.href = '/';
+    setCurrentSection('home');
+    setSelectedProductId(null);
+    window.history.pushState({}, '', '/');
+  };
+
+  const handleNavigate = (section: string, productId?: number) => {
+    if (section === 'producto-detalle' && productId) {
+      setPreviousSection(currentSection);
+      setSelectedProductId(productId);
+      setCurrentSection(section);
+    } else {
+      setCurrentSection(section);
+      setSelectedProductId(null);
+    }
+  };
+
+  const handleBack = () => {
+    setCurrentSection(previousSection);
+    setSelectedProductId(null);
   };
 
   if (showSplash && !searchTerm) {
@@ -51,7 +77,7 @@ function MainContent() {
       }}
     >
       <div style={{ width: '100%', height: '100%', overflowY: 'auto', backgroundColor: theme === 'dark' ? 'rgb(20, 45, 110)' : 'rgb(0, 161, 255)' }}>
-        <MainMenu onLogoClick={resetToHome} />
+        <MainMenu onLogoClick={resetToHome} onNavigate={handleNavigate} />
         <div 
           style={{ 
             backgroundColor: theme === 'dark' ? 'rgb(20, 45, 110)' : 'rgb(0, 161, 255)'
@@ -59,11 +85,21 @@ function MainContent() {
         >
           {searchTerm ? (
             <SearchResults searchTerm={searchTerm} />
+          ) : currentSection === 'producto-detalle' && selectedProductId ? (
+            <ProductDetails productId={selectedProductId} onBack={handleBack} />
+          ) : currentSection === 'productos' ? (
+            <ProductsSection onNavigate={handleNavigate} />
+          ) : currentSection === 'frenos' ? (
+            <CategorySection category="Frenos" onNavigate={handleNavigate} />
+          ) : currentSection === 'embragues' ? (
+            <CategorySection category="Embragues" onNavigate={handleNavigate} />
+          ) : currentSection === 'distribucion' ? (
+            <CategorySection category="Distribución" onNavigate={handleNavigate} />
           ) : (
             <>
               <Slider />
               <AboutSection />
-              <BrandsSection />
+              <BrandsSection onNavigate={handleNavigate} />
               <ContactSection />
             </>
           )}

@@ -23,18 +23,23 @@ const SearchIcon = ({ style }: { style?: React.CSSProperties }) => (
   </svg>
 );
 
-export function MainMenu({ onLogoClick }: { onLogoClick: () => void }) {
+export function MainMenu({ onLogoClick, onNavigate }: { onLogoClick: () => void; onNavigate: (section: string) => void }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const { theme, toggleTheme } = useTheme();
 
   const menuItems = [
-    { name: "Productos", href: "#" },
-    { name: "Frenos", href: "#" },
-    { name: "Embragues", href: "#" },
-    { name: "Distribución", href: "#" },
+    { name: "Productos", section: "productos" },
+    { name: "Frenos", section: "frenos" },
+    { name: "Embragues", section: "embragues" },
+    { name: "Distribución", section: "distribucion" },
   ];
+
+  const handleMenuClick = (section: string) => {
+    onNavigate(section);
+    setMobileMenuOpen(false);
+  };
 
   const handleSearch = () => {
     if (searchTerm.trim() !== "") {
@@ -160,7 +165,11 @@ export function MainMenu({ onLogoClick }: { onLogoClick: () => void }) {
             {menuItems.map((item) => (
               <a
                 key={item.name}
-                href={item.href}
+                href="#"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleMenuClick(item.section);
+                }}
                 style={{
                   color: 'white',
                   fontStyle: 'italic',
@@ -168,6 +177,7 @@ export function MainMenu({ onLogoClick }: { onLogoClick: () => void }) {
                   padding: '8px 24px',
                   borderRadius: '4px',
                   textDecoration: 'none',
+                  cursor: 'pointer'
                 }}
                 onMouseEnter={(e) => {
                   e.currentTarget.style.color = 'rgb(255, 0, 0)';
@@ -317,6 +327,13 @@ export function MainMenu({ onLogoClick }: { onLogoClick: () => void }) {
                     />
                     <button
                       onClick={handleSearch}
+                      onTouchStart={(e) => {
+                        e.currentTarget.style.opacity = '0.8';
+                      }}
+                      onTouchEnd={(e) => {
+                        e.currentTarget.style.opacity = '1';
+                        handleSearch();
+                      }}
                       style={{
                         backgroundColor: 'rgb(200, 200, 200)',
                         transform: 'skewX(-10deg)',
@@ -331,12 +348,6 @@ export function MainMenu({ onLogoClick }: { onLogoClick: () => void }) {
                         flexShrink: '0',
                         transition: 'opacity 0.2s ease',
                       }}
-                      onTouchStart={(e) => {
-                        e.currentTarget.style.opacity = '0.8';
-                      }}
-                      onTouchEnd={(e) => {
-                        e.currentTarget.style.opacity = '1';
-                      }}
                     >
                       <SearchIcon style={{ color: 'black', width: '20px', height: '20px' }} />
                     </button>
@@ -347,7 +358,11 @@ export function MainMenu({ onLogoClick }: { onLogoClick: () => void }) {
               {menuItems.map((item) => (
                 <a
                   key={item.name}
-                  href={item.href}
+                  href="#"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleMenuClick(item.section);
+                  }}
                   style={{
                     color: 'white',
                     fontStyle: 'italic',
@@ -357,6 +372,7 @@ export function MainMenu({ onLogoClick }: { onLogoClick: () => void }) {
                     transition: 'all 0.3s',
                     borderRadius: '4px',
                     textDecoration: 'none',
+                    cursor: 'pointer'
                   }}
                   onTouchStart={(e) => {
                     e.currentTarget.style.color = 'rgb(255, 0, 0)';

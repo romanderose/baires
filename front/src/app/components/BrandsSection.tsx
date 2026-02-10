@@ -27,7 +27,11 @@ import logo23 from "@/assets/e65e45cd8ae41fa0790b8131de046aa1e05855bc.png";
 import logo24 from "@/assets/4a83dec7957dbddc0abc3644ee63f8351e27f8b2.png";
 import logo25 from "@/assets/e237f841a748662e6066713a41f8a9fa0f64b30b.png";
 
-export function BrandsSection() {
+interface BrandsSectionProps {
+  onNavigate: (section: string) => void;
+}
+
+export function BrandsSection({ onNavigate }: BrandsSectionProps) {
   const { theme } = useTheme();
   const [currentGroup, setCurrentGroup] = useState(0);
 
@@ -206,6 +210,7 @@ export function BrandsSection() {
               Para conocer nuestros productos, haga
             </p>
             <button
+              onClick={() => onNavigate('productos')}
               style={{
                 backgroundColor: 'rgb(154, 113, 71)',
                 color: 'white',
@@ -213,8 +218,8 @@ export function BrandsSection() {
                 border: 'none',
                 cursor: 'pointer',
                 fontSize: '1rem',
-                fontWeight: '500',
-                fontStyle: 'italic',
+                fontFamily: 'Arial, sans-serif',
+                fontWeight: 'normal',
                 borderRadius: '5px',
                 textTransform: 'none',
                 transform: 'skewX(-10deg)',
@@ -222,25 +227,21 @@ export function BrandsSection() {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.backgroundColor = 'rgb(194, 143, 91)';
-                e.currentTarget.style.fontStyle = 'normal';
                 e.currentTarget.style.textTransform = 'uppercase';
                 e.currentTarget.style.transform = 'skewX(0deg)';
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.backgroundColor = 'rgb(154, 113, 71)';
-                e.currentTarget.style.fontStyle = 'italic';
                 e.currentTarget.style.textTransform = 'none';
                 e.currentTarget.style.transform = 'skewX(-10deg)';
               }}
               onTouchStart={(e) => {
                 e.currentTarget.style.backgroundColor = 'rgb(194, 143, 91)';
-                e.currentTarget.style.fontStyle = 'normal';
                 e.currentTarget.style.textTransform = 'uppercase';
                 e.currentTarget.style.transform = 'skewX(0deg)';
               }}
               onTouchEnd={(e) => {
                 e.currentTarget.style.backgroundColor = 'rgb(154, 113, 71)';
-                e.currentTarget.style.fontStyle = 'italic';
                 e.currentTarget.style.textTransform = 'none';
                 e.currentTarget.style.transform = 'skewX(-10deg)';
               }}

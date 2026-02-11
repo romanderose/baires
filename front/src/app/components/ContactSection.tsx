@@ -164,9 +164,15 @@ export function ContactSection() {
                 transition: 'all 0.3s ease'
               }}
               onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgb(0, 161, 255)';
+                e.currentTarget.style.backgroundColor = 'rgb(60, 120, 220)';
               }}
               onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = theme === 'dark' ? 'rgb(50, 90, 180)' : 'rgb(11, 32, 110)';
+              }}
+              onTouchStart={(e) => {
+                e.currentTarget.style.backgroundColor = 'rgb(60, 120, 220)';
+              }}
+              onTouchEnd={(e) => {
                 e.currentTarget.style.backgroundColor = theme === 'dark' ? 'rgb(50, 90, 180)' : 'rgb(11, 32, 110)';
               }}
             >

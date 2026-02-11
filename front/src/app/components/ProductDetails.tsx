@@ -1,4 +1,5 @@
 import { useTheme } from "@/app/contexts/ThemeContext";
+import { useCart } from "@/app/contexts/CartContext";
 import { products } from "@/app/data/products";
 
 interface ProductDetailsProps {
@@ -8,6 +9,7 @@ interface ProductDetailsProps {
 
 export function ProductDetails({ productId, onBack }: ProductDetailsProps) {
   const { theme } = useTheme();
+  const { addToCart } = useCart();
   const product = products.find(p => p.id === productId);
 
   if (!product) {
@@ -28,126 +30,141 @@ export function ProductDetails({ productId, onBack }: ProductDetailsProps) {
         Detalles del producto
       </h1>
 
-      <div 
-        style={{
-          backgroundColor: theme === 'dark' ? 'rgb(7, 21, 77)' : 'rgb(40, 80, 160)',
-          borderRadius: '8px',
-          padding: '2rem',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1.5rem',
-          maxWidth: '600px'
-        }}
-      >
-        <img
-          src={product.imagen}
-          alt={product.nombre}
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div 
           style={{
-            width: '100%',
-            height: 'auto',
-            maxHeight: '400px',
-            objectFit: 'cover',
-            borderRadius: '8px'
+            backgroundColor: theme === 'dark' ? 'rgb(7, 21, 77)' : 'rgb(40, 80, 160)',
+            borderRadius: '8px',
+            padding: '2rem',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1.5rem',
+            maxWidth: '600px',
+            width: '100%'
           }}
-        />
-        
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <h2
+        >
+          <img
+            src={product.imagen}
+            alt={product.nombre}
             style={{
-              fontFamily: 'Arial, sans-serif',
-              fontSize: '1.5rem',
-              fontWeight: 'bold',
-              color: 'white',
-              margin: 0
+              width: '100%',
+              height: 'auto',
+              maxHeight: '400px',
+              objectFit: 'cover',
+              borderRadius: '8px'
             }}
-          >
-            {product.nombre}
-          </h2>
+          />
           
-          <p
-            style={{
-              fontFamily: 'Arial, sans-serif',
-              fontSize: '1.125rem',
-              color: 'white',
-              margin: 0
-            }}
-          >
-            <strong>Marca:</strong> {product.marca}
-          </p>
-          
-          <p
-            style={{
-              fontFamily: 'Arial, sans-serif',
-              fontSize: '1.5rem',
-              fontWeight: 'bold',
-              color: 'white',
-              margin: 0
-            }}
-          >
-            ${product.precio.toLocaleString('es-AR')}
-          </p>
-          
-          <p
-            style={{
-              fontFamily: 'Arial, sans-serif',
-              fontSize: '1.125rem',
-              color: 'white',
-              margin: 0
-            }}
-          >
-            <strong>Estado:</strong> {product.estado}
-          </p>
-          
-          <p
-            style={{
-              fontFamily: 'Arial, sans-serif',
-              fontSize: '1.125rem',
-              color: 'white',
-              margin: 0
-            }}
-          >
-            <strong>Categoría:</strong> {product.categoria}
-          </p>
-          
-          <button
-            style={{
-              backgroundColor: 'rgb(154, 113, 71)',
-              color: 'white',
-              padding: '0.75rem 1.5rem',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer',
-              fontSize: '1rem',
-              fontFamily: 'Arial, sans-serif',
-              fontWeight: '500',
-              transition: 'background-color 0.3s ease',
-              marginTop: '1rem'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgb(194, 143, 91)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = 'rgb(154, 113, 71)';
-            }}
-          >
-            Agregar al carrito
-          </button>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <h2
+              style={{
+                fontFamily: 'Arial, sans-serif',
+                fontSize: '1.5rem',
+                fontWeight: 'bold',
+                color: 'white',
+                margin: 0
+              }}
+            >
+              {product.nombre}
+            </h2>
+            
+            <p
+              style={{
+                fontFamily: 'Arial, sans-serif',
+                fontSize: '1.125rem',
+                color: 'white',
+                margin: 0
+              }}
+            >
+              <strong>Marca:</strong> {product.marca}
+            </p>
+            
+            <p
+              style={{
+                fontFamily: 'Arial, sans-serif',
+                fontSize: '1.5rem',
+                fontWeight: 'bold',
+                color: 'white',
+                margin: 0
+              }}
+            >
+              ${product.precio.toLocaleString('es-AR')}
+            </p>
+            
+            <p
+              style={{
+                fontFamily: 'Arial, sans-serif',
+                fontSize: '1.125rem',
+                color: 'white',
+                margin: 0
+              }}
+            >
+              <strong>Estado:</strong> {product.estado}
+            </p>
+            
+            <p
+              style={{
+                fontFamily: 'Arial, sans-serif',
+                fontSize: '1.125rem',
+                color: 'white',
+                margin: 0
+              }}
+            >
+              <strong>Categoría:</strong> {product.categoria}
+            </p>
+            
+            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}>
+              <button
+                onClick={() => addToCart(product)}
+                style={{
+                  backgroundColor: 'rgb(154, 113, 71)',
+                  color: 'white',
+                  padding: '0.75rem 1.5rem',
+                  border: 'none',
+                  borderRadius: '5px',
+                  cursor: 'pointer',
+                  fontSize: '1rem',
+                  fontFamily: 'Arial, sans-serif',
+                  fontWeight: '500',
+                  transition: 'background-color 0.3s ease',
+                  width: 'fit-content'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgb(194, 143, 91)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'rgb(154, 113, 71)';
+                }}
+              >
+                Agregar al carrito
+              </button>
+            </div>
+          </div>
         </div>
       </div>
 
-      <p
-        onClick={onBack}
-        style={{
-          fontFamily: 'Arial, sans-serif',
-          fontSize: '1rem',
-          color: 'white',
-          marginTop: '1.5rem',
-          cursor: 'pointer',
-          textDecoration: 'underline'
-        }}
-      >
-        Volver
-      </p>
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.5rem' }}>
+        <p
+          onClick={onBack}
+          style={{
+            fontFamily: 'Arial, sans-serif',
+            fontSize: '1rem',
+            color: 'white',
+            cursor: 'pointer',
+            textDecoration: 'underline',
+            transition: 'opacity 0.3s ease',
+            margin: 0
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.opacity = '0.7';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.opacity = '1';
+          }}
+        >
+          Volver
+        </p>
+      </div>
     </section>
   );
 }

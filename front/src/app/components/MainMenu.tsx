@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { Menu, X, Sun, Moon } from "lucide-react";
+import { Menu, X, Sun, Moon, ShoppingCart } from "lucide-react";
 import logoImage from "@/assets/6f6533c56c5c671e2060e1881d36cff10645dfc6.png";
 import { useTheme } from "@/app/contexts/ThemeContext";
+import { useCart } from "@/app/contexts/CartContext";
 
 // Componente de lupa personalizado con círculo inclinado a la derecha
 const SearchIcon = ({ style }: { style?: React.CSSProperties }) => (
@@ -27,7 +28,11 @@ export function MainMenu({ onLogoClick, onNavigate }: { onLogoClick: () => void;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
+  const [cartPreviewOpen, setCartPreviewOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
+  const { getTotalItems } = useCart();
+
+  const totalItems = getTotalItems();
 
   const menuItems = [
     { name: "Productos", section: "productos" },
@@ -70,8 +75,115 @@ export function MainMenu({ onLogoClick, onNavigate }: { onLogoClick: () => void;
             />
           </div>
 
-          {/* Botón selector de tema deslizante - Desktop */}
-          <div style={{ position: 'absolute', top: '16px', right: '20px' }}>
+          {/* Carrito y selector de tema - Desktop */}
+          <div style={{ position: 'absolute', top: '16px', right: '20px', display: 'flex', gap: '12px', alignItems: 'center' }}>
+            {/* Ícono de carrito */}
+            <div
+              style={{ position: 'relative' }}
+              onMouseEnter={() => setCartPreviewOpen(true)}
+              onMouseLeave={() => setCartPreviewOpen(false)}
+            >
+              <button
+                onClick={() => totalItems > 0 && onNavigate('carrito')}
+                style={{
+                  backgroundColor: 'transparent',
+                  border: 'none',
+                  cursor: totalItems > 0 ? 'pointer' : 'default',
+                  position: 'relative',
+                  padding: '4px'
+                }}
+                aria-label="Carrito"
+              >
+                <ShoppingCart className="w-6 h-6" style={{ color: 'white' }} />
+                {totalItems > 0 && (
+                  <span
+                    style={{
+                      position: 'absolute',
+                      top: '-4px',
+                      right: '-4px',
+                      backgroundColor: 'rgb(255, 0, 0)',
+                      color: 'white',
+                      borderRadius: '50%',
+                      width: '18px',
+                      height: '18px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '0.75rem',
+                      fontWeight: 'bold'
+                    }}
+                  >
+                    {totalItems}
+                  </span>
+                )}
+              </button>
+
+              {/* Preview del carrito */}
+              {cartPreviewOpen && (
+                <div
+                  style={{
+                    position: 'absolute',
+                    top: '100%',
+                    right: '0',
+                    marginTop: '8px',
+                    backgroundColor: theme === 'dark' ? 'rgb(7, 21, 77)' : 'rgb(40, 80, 160)',
+                    borderRadius: '8px',
+                    padding: '1rem',
+                    minWidth: '200px',
+                    boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
+                    zIndex: 1000
+                  }}
+                >
+                  {/* Punta de flecha */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '-8px',
+                      right: '12px',
+                      width: '0',
+                      height: '0',
+                      borderLeft: '8px solid transparent',
+                      borderRight: '8px solid transparent',
+                      borderBottom: `8px solid ${theme === 'dark' ? 'rgb(7, 21, 77)' : 'rgb(40, 80, 160)'}`
+                    }}
+                  />
+
+                  <p
+                    style={{
+                      fontFamily: 'Arial, sans-serif',
+                      fontSize: '0.875rem',
+                      color: 'white',
+                      margin: '0 0 0.75rem 0',
+                      textAlign: 'center'
+                    }}
+                  >
+                    {totalItems > 0 ? `Tienes ${totalItems} producto${totalItems > 1 ? 's' : ''}` : 'Carrito vacío'}
+                  </p>
+
+                  <button
+                    onClick={() => totalItems > 0 && onNavigate('carrito')}
+                    disabled={totalItems === 0}
+                    style={{
+                      backgroundColor: totalItems > 0 ? 'rgb(154, 113, 71)' : 'rgb(100, 100, 100)',
+                      color: 'white',
+                      padding: '0.5rem 1rem',
+                      border: 'none',
+                      borderRadius: '5px',
+                      cursor: totalItems > 0 ? 'pointer' : 'not-allowed',
+                      fontSize: '0.875rem',
+                      fontFamily: 'Arial, sans-serif',
+                      fontWeight: '500',
+                      width: '100%',
+                      opacity: totalItems > 0 ? 1 : 0.6
+                    }}
+                  >
+                    Ver carrito
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Botón selector de tema deslizante */}
             <button
               onClick={toggleTheme}
               style={{
@@ -236,8 +348,121 @@ export function MainMenu({ onLogoClick, onNavigate }: { onLogoClick: () => void;
         {mobileMenuOpen && (
           <div style={{ borderTop: '1px solid rgba(255, 255, 255, 0.2)' }}>
             <div style={{ paddingLeft: '16px', paddingRight: '16px', paddingTop: '8px', paddingBottom: '8px' }}>
-              {/* Botón selector de tema deslizante - Mobile */}
-              <div style={{ paddingTop: '12px', paddingBottom: '12px', display: 'flex', justifyContent: 'center' }}>
+              {/* Carrito y selector de tema - Mobile */}
+              <div style={{ paddingTop: '12px', paddingBottom: '12px', display: 'flex', justifyContent: 'center', gap: '16px', alignItems: 'center' }}>
+                {/* Ícono de carrito - Mobile */}
+                <div style={{ position: 'relative' }}>
+                  <button
+                    onClick={() => {
+                      setCartPreviewOpen(!cartPreviewOpen);
+                    }}
+                    style={{
+                      backgroundColor: 'transparent',
+                      border: 'none',
+                      cursor: 'pointer',
+                      position: 'relative',
+                      padding: '4px'
+                    }}
+                    aria-label="Carrito"
+                  >
+                    <ShoppingCart className="w-6 h-6" style={{ color: 'white' }} />
+                    {totalItems > 0 && (
+                      <span
+                        style={{
+                          position: 'absolute',
+                          top: '-4px',
+                          right: '-4px',
+                          backgroundColor: 'rgb(255, 0, 0)',
+                          color: 'white',
+                          borderRadius: '50%',
+                          width: '18px',
+                          height: '18px',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontSize: '0.75rem',
+                          fontWeight: 'bold'
+                        }}
+                      >
+                        {totalItems}
+                      </span>
+                    )}
+                  </button>
+
+                  {/* Preview del carrito - Mobile */}
+                  {cartPreviewOpen && (
+                    <div
+                      style={{
+                        position: 'absolute',
+                        top: '100%',
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        marginTop: '8px',
+                        backgroundColor: theme === 'dark' ? 'rgb(7, 21, 77)' : 'rgb(40, 80, 160)',
+                        borderRadius: '8px',
+                        padding: '1rem',
+                        minWidth: '200px',
+                        boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
+                        zIndex: 1000
+                      }}
+                    >
+                      {/* Punta de flecha */}
+                      <div
+                        style={{
+                          position: 'absolute',
+                          top: '-8px',
+                          left: '50%',
+                          transform: 'translateX(-50%)',
+                          width: '0',
+                          height: '0',
+                          borderLeft: '8px solid transparent',
+                          borderRight: '8px solid transparent',
+                          borderBottom: `8px solid ${theme === 'dark' ? 'rgb(7, 21, 77)' : 'rgb(40, 80, 160)'}`
+                        }}
+                      />
+
+                      <p
+                        style={{
+                          fontFamily: 'Arial, sans-serif',
+                          fontSize: '0.875rem',
+                          color: 'white',
+                          margin: '0 0 0.75rem 0',
+                          textAlign: 'center'
+                        }}
+                      >
+                        {totalItems > 0 ? `Tienes ${totalItems} producto${totalItems > 1 ? 's' : ''}` : 'Carrito vacío'}
+                      </p>
+
+                      <button
+                        onClick={() => {
+                          if (totalItems > 0) {
+                            onNavigate('carrito');
+                            setCartPreviewOpen(false);
+                            setMobileMenuOpen(false);
+                          }
+                        }}
+                        disabled={totalItems === 0}
+                        style={{
+                          backgroundColor: totalItems > 0 ? 'rgb(154, 113, 71)' : 'rgb(100, 100, 100)',
+                          color: 'white',
+                          padding: '0.5rem 1rem',
+                          border: 'none',
+                          borderRadius: '5px',
+                          cursor: totalItems > 0 ? 'pointer' : 'not-allowed',
+                          fontSize: '0.875rem',
+                          fontFamily: 'Arial, sans-serif',
+                          fontWeight: '500',
+                          width: '100%',
+                          opacity: totalItems > 0 ? 1 : 0.6
+                        }}
+                      >
+                        Ver carrito
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+                {/* Botón selector de tema deslizante */}
                 <button
                   onClick={toggleTheme}
                   style={{

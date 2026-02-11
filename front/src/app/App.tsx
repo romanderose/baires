@@ -9,8 +9,10 @@ import { SearchResults } from "@/app/components/SearchResults";
 import { ProductsSection } from "@/app/components/ProductsSection";
 import { ProductDetails } from "@/app/components/ProductDetails";
 import { CategorySection } from "@/app/components/CategorySection";
+import { CartSection } from "@/app/components/CartSection";
 import { Footer } from "@/app/components/Footer";
 import { ThemeProvider, useTheme } from "@/app/contexts/ThemeContext";
+import { CartProvider } from "@/app/contexts/CartContext";
 
 function MainContent() {
   const { theme } = useTheme();
@@ -40,6 +42,7 @@ function MainContent() {
   const resetToHome = () => {
     setCurrentSection('home');
     setSelectedProductId(null);
+    setShowSplash(true);
     window.history.pushState({}, '', '/');
   };
 
@@ -84,9 +87,11 @@ function MainContent() {
           }}
         >
           {searchTerm ? (
-            <SearchResults searchTerm={searchTerm} />
+            <SearchResults searchTerm={searchTerm} onNavigate={handleNavigate} />
           ) : currentSection === 'producto-detalle' && selectedProductId ? (
             <ProductDetails productId={selectedProductId} onBack={handleBack} />
+          ) : currentSection === 'carrito' ? (
+            <CartSection />
           ) : currentSection === 'productos' ? (
             <ProductsSection onNavigate={handleNavigate} />
           ) : currentSection === 'frenos' ? (
@@ -113,7 +118,9 @@ function MainContent() {
 export default function App() {
   return (
     <ThemeProvider>
-      <MainContent />
+      <CartProvider>
+        <MainContent />
+      </CartProvider>
     </ThemeProvider>
   );
 }

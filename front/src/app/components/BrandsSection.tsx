@@ -86,7 +86,7 @@ export function BrandsSection({ onNavigate }: BrandsSectionProps) {
             color: 'white'
           }}
         >
-          Trabajamos con una amplia variedad de marcas reconocidas del mercado automotor argentino. Ofrecemos repuestos, accesorios y autopartes compatibles con múltiples modelos y versiones, para que siempre encuentres una solución confiable y adecuada para tu vehículo.
+          Trabajamos con una amplia variedad de marcas reconocidas del mercado del automotor. Ofrecemos repuestos, accesorios y autopartes compatibles con múltiples modelos y versiones, para que siempre encuentres una solución confiable y adecuada para tu vehículo.
         </p>
 
         {/* Mostrador de marcas */}

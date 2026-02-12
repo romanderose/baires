@@ -19,34 +19,41 @@ function MainContent() {
 
   // Leer parámetro de búsqueda de la URL
   const searchParams = new URLSearchParams(window.location.search);
-  const searchTerm = searchParams.get('search') || '';
+  const initialSearchTerm = searchParams.get('search') || '';
 
   // Estado de navegación
-  const [currentSection, setCurrentSection] = useState<string>('home');
+  const [currentSection, setCurrentSection] = useState<string>(initialSearchTerm ? 'busqueda' : 'home');
+  const [searchTerm, setSearchTerm] = useState<string>(initialSearchTerm);
   const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
   const [previousSection, setPreviousSection] = useState<string>('home');
 
-  // Mostrar splash solo si NO hay búsqueda
-  const [showSplash, setShowSplash] = useState(!searchTerm);
+  // Mostrar splash solo si NO hay búsqueda inicial
+  const [showSplash, setShowSplash] = useState(!initialSearchTerm);
 
   useEffect(() => {
-    if (showSplash && !searchTerm) {
+    if (showSplash && !initialSearchTerm) {
       const timer = setTimeout(() => {
         setShowSplash(false);
-      }, 5000); // 5 segundos
+      }, 5000);
 
       return () => clearTimeout(timer);
     }
-  }, [showSplash, searchTerm]);
+  }, [showSplash, initialSearchTerm]);
 
   const resetToHome = () => {
     setCurrentSection('home');
     setSelectedProductId(null);
+    setSearchTerm('');
     setShowSplash(true);
     window.history.pushState({}, '', '/');
   };
 
   const handleNavigate = (section: string, productId?: number) => {
+    // Limpiar parámetro de búsqueda de la URL cuando se navega
+    if (window.location.search) {
+      window.history.pushState({}, '', '/');
+    }
+    
     if (section === 'producto-detalle' && productId) {
       setPreviousSection(currentSection);
       setSelectedProductId(productId);
@@ -62,7 +69,7 @@ function MainContent() {
     setSelectedProductId(null);
   };
 
-  if (showSplash && !searchTerm) {
+  if (showSplash && !initialSearchTerm) {
     return <SplashScreen />;
   }
 
@@ -86,7 +93,7 @@ function MainContent() {
             backgroundColor: theme === 'dark' ? 'rgb(20, 45, 110)' : 'rgb(0, 161, 255)'
           }}
         >
-          {searchTerm ? (
+          {currentSection === 'busqueda' && searchTerm ? (
             <SearchResults searchTerm={searchTerm} onNavigate={handleNavigate} />
           ) : currentSection === 'producto-detalle' && selectedProductId ? (
             <ProductDetails productId={selectedProductId} onBack={handleBack} />

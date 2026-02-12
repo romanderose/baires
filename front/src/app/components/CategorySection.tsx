@@ -68,7 +68,7 @@ export function CategorySection({ category, onNavigate }: CategorySectionProps) 
                 style={{
                   fontFamily: 'Arial, sans-serif',
                   fontSize: '1.125rem',
-                  fontWeight: 'bold',
+                  fontWeight: '400',
                   color: 'white',
                   margin: 0,
                   flexGrow: 1
@@ -89,31 +89,39 @@ export function CategorySection({ category, onNavigate }: CategorySectionProps) 
                 ${product.precio.toLocaleString('es-AR')}
               </p>
               
-              <div style={{ display: 'flex', justifyContent: 'center' }}>
-                <button
-                  onClick={() => onNavigate('producto-detalle', product.id)}
-                  style={{
-                    backgroundColor: 'rgb(154, 113, 71)',
-                    color: 'white',
-                    padding: '0.75rem 1.5rem',
-                    border: 'none',
-                    borderRadius: '5px',
-                    cursor: 'pointer',
-                    fontSize: '1rem',
-                    fontFamily: 'Arial, sans-serif',
-                    fontWeight: '500',
-                    transition: 'background-color 0.3s ease',
-                    width: 'fit-content'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.backgroundColor = 'rgb(194, 143, 91)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.backgroundColor = 'rgb(154, 113, 71)';
-                  }}
-                >
-                  Ver detalles
-                </button>
+              <div 
+                style={{ 
+                  borderTop: '2px solid rgba(255, 255, 255, 0.2)',
+                  marginTop: '0.5rem',
+                  paddingTop: '0.75rem'
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                  <button
+                    onClick={() => onNavigate('producto-detalle', product.id)}
+                    style={{
+                      backgroundColor: 'rgb(154, 113, 71)',
+                      color: 'white',
+                      padding: '0.75rem 1.5rem',
+                      border: 'none',
+                      borderRadius: '5px',
+                      cursor: 'pointer',
+                      fontSize: '1rem',
+                      fontFamily: 'Arial, sans-serif',
+                      fontWeight: '500',
+                      transition: 'background-color 0.3s ease',
+                      width: 'fit-content'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgb(194, 143, 91)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgb(154, 113, 71)';
+                    }}
+                  >
+                    Ver detalles
+                  </button>
+                </div>
               </div>
             </div>
           ))}

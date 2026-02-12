@@ -59,8 +59,8 @@ export function ProductDetails({ productId, onBack }: ProductDetailsProps) {
             <h2
               style={{
                 fontFamily: 'Arial, sans-serif',
-                fontSize: '1.5rem',
-                fontWeight: 'bold',
+                fontSize: '1.875rem',
+                fontWeight: '500',
                 color: 'white',
                 margin: 0
               }}
@@ -76,14 +76,15 @@ export function ProductDetails({ productId, onBack }: ProductDetailsProps) {
                 margin: 0
               }}
             >
-              <strong>Marca:</strong> {product.marca}
+              <span style={{ fontWeight: '500' }}>Marca:</span>{' '}
+              <span style={{ fontStyle: 'italic' }}>{product.marca}</span>
             </p>
             
             <p
               style={{
                 fontFamily: 'Arial, sans-serif',
                 fontSize: '1.5rem',
-                fontWeight: 'bold',
+                fontWeight: '500',
                 color: 'white',
                 margin: 0
               }}
@@ -99,7 +100,8 @@ export function ProductDetails({ productId, onBack }: ProductDetailsProps) {
                 margin: 0
               }}
             >
-              <strong>Estado:</strong> {product.estado}
+              <span style={{ fontWeight: '500' }}>Estado:</span>{' '}
+              <span style={{ fontStyle: 'italic' }}>{product.estado}</span>
             </p>
             
             <p
@@ -110,34 +112,43 @@ export function ProductDetails({ productId, onBack }: ProductDetailsProps) {
                 margin: 0
               }}
             >
-              <strong>Categoría:</strong> {product.categoria}
+              <span style={{ fontWeight: '500' }}>Categoría:</span>{' '}
+              <span style={{ fontStyle: 'italic' }}>{product.categoria}</span>
             </p>
             
-            <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1rem' }}>
-              <button
-                onClick={() => addToCart(product)}
-                style={{
-                  backgroundColor: 'rgb(154, 113, 71)',
-                  color: 'white',
-                  padding: '0.75rem 1.5rem',
-                  border: 'none',
-                  borderRadius: '5px',
-                  cursor: 'pointer',
-                  fontSize: '1rem',
-                  fontFamily: 'Arial, sans-serif',
-                  fontWeight: '500',
-                  transition: 'background-color 0.3s ease',
-                  width: 'fit-content'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgb(194, 143, 91)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = 'rgb(154, 113, 71)';
-                }}
-              >
-                Agregar al carrito
-              </button>
+            <div 
+              style={{ 
+                borderTop: '2px solid rgba(255, 255, 255, 0.2)',
+                marginTop: '0.5rem',
+                paddingTop: '0.75rem'
+              }}
+            >
+              <div style={{ display: 'flex', justifyContent: 'center' }}>
+                <button
+                  onClick={() => addToCart(product)}
+                  style={{
+                    backgroundColor: 'rgb(154, 113, 71)',
+                    color: 'white',
+                    padding: '0.75rem 1.5rem',
+                    border: 'none',
+                    borderRadius: '5px',
+                    cursor: 'pointer',
+                    fontSize: '1rem',
+                    fontFamily: 'Arial, sans-serif',
+                    fontWeight: '500',
+                    transition: 'background-color 0.3s ease',
+                    width: 'fit-content'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'rgb(194, 143, 91)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'rgb(154, 113, 71)';
+                  }}
+                >
+                  Agregar al carrito
+                </button>
+              </div>
             </div>
           </div>
         </div>

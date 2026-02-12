@@ -8,6 +8,9 @@ interface CartItem extends Product {
 interface CartContextType {
   items: CartItem[];
   addToCart: (product: Product) => void;
+  decrementItem: (productId: number) => void;
+  removeItem: (productId: number) => void;
+  clearCart: () => void;
   getTotalItems: () => number;
   getTotalPrice: () => number;
 }
@@ -31,6 +34,27 @@ export function CartProvider({ children }: { children: ReactNode }) {
     });
   };
 
+  const decrementItem = (productId: number) => {
+    setItems(prev => {
+      const item = prev.find(i => i.id === productId);
+      if (!item || item.quantity <= 1) return prev;
+      
+      return prev.map(i =>
+        i.id === productId
+          ? { ...i, quantity: i.quantity - 1 }
+          : i
+      );
+    });
+  };
+
+  const removeItem = (productId: number) => {
+    setItems(prev => prev.filter(item => item.id !== productId));
+  };
+
+  const clearCart = () => {
+    setItems([]);
+  };
+
   const getTotalItems = () => {
     return items.reduce((sum, item) => sum + item.quantity, 0);
   };
@@ -40,7 +64,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <CartContext.Provider value={{ items, addToCart, getTotalItems, getTotalPrice }}>
+    <CartContext.Provider value={{ items, addToCart, decrementItem, removeItem, clearCart, getTotalItems, getTotalPrice }}>
       {children}
     </CartContext.Provider>
   );

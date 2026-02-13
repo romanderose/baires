@@ -33,7 +33,7 @@ export function ProductsSection({ onNavigate }: ProductsSectionProps) {
         <div 
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(min(280px, 100%), 1fr))',
             gap: '1.5rem',
             padding: '0 15px'
           }}
@@ -48,7 +48,9 @@ export function ProductsSection({ onNavigate }: ProductsSectionProps) {
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '0.75rem',
-                border: '2px solid rgba(255, 255, 255, 0.1)'
+                border: '2px solid rgba(255, 255, 255, 0.1)',
+                boxSizing: 'border-box',
+                maxWidth: '100%'
               }}
             >
               <img

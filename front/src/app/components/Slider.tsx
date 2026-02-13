@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from "react";
-import bairesSuspensionImg from "@/assets/f982c9b352a882c04c0b942189a1e67009400f7d.png";
-import slide0 from "@/assets/03818d9729ea90fbf4fb8f9f6cb20d51a717475a.png";
-import slide1 from "@/assets/d4389a8ed19bafede7466af23b89d3b4676b7e36.png";
-import slide2 from "@/assets/9b6c62cb0afdc6050e488cea7e360b8a8ab03593.png";
-import arrowIcon from "@/assets/18d4bb9bdaefa75f46d6589fef8388d2235a378c.png";
+import bairesSuspensionImg from "figma:asset/f982c9b352a882c04c0b942189a1e67009400f7d.png";
+import slide0 from "figma:asset/03818d9729ea90fbf4fb8f9f6cb20d51a717475a.png";
+import slide1 from "figma:asset/d4389a8ed19bafede7466af23b89d3b4676b7e36.png";
+import slide2 from "figma:asset/9b6c62cb0afdc6050e488cea7e360b8a8ab03593.png";
+import arrowIcon from "figma:asset/18d4bb9bdaefa75f46d6589fef8388d2235a378c.png";
 import { useTheme } from "@/app/contexts/ThemeContext";
 
 export function Slider() {
@@ -84,7 +84,7 @@ export function Slider() {
     <div className="p-[30px]" style={{ marginTop: '48px' }}>
       <div
         className="relative mx-auto h-96 flex items-center justify-center overflow-hidden rounded-[5px] border-2 border-red-600"
-        style={{
+        style={{ 
           backgroundColor: theme === 'light' ? 'rgb(7, 21, 77)' : 'rgb(7, 21, 77)',
           maxWidth: "800px"
         }}
@@ -95,9 +95,9 @@ export function Slider() {
         <div
           className="w-full h-full flex items-center justify-center transition-transform duration-300 ease-in-out"
           style={{
-            transform: isTransitioning
-              ? direction === "right"
-                ? "translateX(-100%)"
+            transform: isTransitioning 
+              ? direction === "right" 
+                ? "translateX(-100%)" 
                 : "translateX(100%)"
               : "translateX(0)"
           }}
@@ -151,14 +151,14 @@ export function Slider() {
                 onClick={() => goToSlide(index)}
                 className="w-3 h-3 rounded-full transition-colors"
                 style={{
-                  backgroundColor: index === currentSlide
+                  backgroundColor: index === currentSlide 
                     ? (theme === 'dark' ? 'rgb(0, 161, 255)' : 'white')
                     : (theme === 'dark' ? 'rgba(0, 161, 255, 0.5)' : 'rgba(255, 255, 255, 0.5)')
                 }}
               />
             ))}
           </div>
-
+          
           {/* Barra de loading lineal */}
           <div className="w-24 h-0.5 bg-white/30 rounded-full overflow-hidden">
             <div

@@ -17,18 +17,6 @@ export function CartSection() {
 
   return (
     <section className="max-w-7xl mx-auto py-12" style={{ paddingLeft: '1.5rem', paddingRight: '1.5rem' }}>
-      <h1 
-        style={{ 
-          fontFamily: 'Arial, sans-serif',
-          fontSize: '2rem',
-          fontWeight: 'bold',
-          color: 'white',
-          marginBottom: '2rem'
-        }}
-      >
-        Tu carrito
-      </h1>
-
       <div 
         style={{
           backgroundColor: theme === 'dark' ? 'rgb(7, 21, 77)' : 'rgb(40, 80, 160)',
@@ -39,6 +27,18 @@ export function CartSection() {
           gap: '1.5rem'
         }}
       >
+        <h1 
+          style={{ 
+            fontFamily: 'Arial, sans-serif',
+            fontSize: '2rem',
+            fontWeight: 'bold',
+            color: 'white',
+            margin: 0
+          }}
+        >
+          Tu carrito
+        </h1>
+
         {items.length === 0 ? (
           <p
             style={{

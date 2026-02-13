@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Menu, X, Sun, Moon, ShoppingCart } from "lucide-react";
-import logoImage from "@/assets/6f6533c56c5c671e2060e1881d36cff10645dfc6.png";
+import logoImage from "figma:asset/6f6533c56c5c671e2060e1881d36cff10645dfc6.png";
 import { useTheme } from "@/app/contexts/ThemeContext";
 import { useCart } from "@/app/contexts/CartContext";
+import { AdvancedSearchModal } from "./AdvancedSearchModal";
 
 // Componente de lupa personalizado con círculo inclinado a la derecha
 const SearchIcon = ({ style }: { style?: React.CSSProperties }) => (
@@ -29,6 +30,8 @@ export function MainMenu({ onLogoClick, onNavigate }: { onLogoClick: () => void;
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const [cartPreviewOpen, setCartPreviewOpen] = useState(false);
+  const [searchFocused, setSearchFocused] = useState(false);
+  const [advancedSearchOpen, setAdvancedSearchOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
   const { getTotalItems } = useCart();
 
@@ -54,7 +57,7 @@ export function MainMenu({ onLogoClick, onNavigate }: { onLogoClick: () => void;
 
   return (
     <nav
-      style={{
+      style={{ 
         backgroundColor: theme === 'light' ? 'rgb(40, 80, 160)' : 'rgb(7, 21, 77)',
         width: '100%',
         borderBottom: '4px solid rgb(255, 0, 0)',
@@ -78,7 +81,7 @@ export function MainMenu({ onLogoClick, onNavigate }: { onLogoClick: () => void;
           {/* Carrito y selector de tema - Desktop */}
           <div style={{ position: 'absolute', top: '16px', right: '20px', display: 'flex', gap: '12px', alignItems: 'center' }}>
             {/* Ícono de carrito */}
-            <div
+            <div 
               style={{ position: 'relative' }}
               onMouseEnter={() => setCartPreviewOpen(true)}
               onMouseLeave={() => setCartPreviewOpen(false)}
@@ -117,7 +120,7 @@ export function MainMenu({ onLogoClick, onNavigate }: { onLogoClick: () => void;
                   </span>
                 )}
               </button>
-
+              
               {/* Preview del carrito */}
               {cartPreviewOpen && (
                 <div
@@ -125,29 +128,43 @@ export function MainMenu({ onLogoClick, onNavigate }: { onLogoClick: () => void;
                     position: 'absolute',
                     top: '100%',
                     right: '0',
-                    marginTop: '8px',
+                    marginTop: '12px',
                     backgroundColor: theme === 'dark' ? 'rgb(7, 21, 77)' : 'rgb(40, 80, 160)',
                     borderRadius: '8px',
                     padding: '1rem',
                     minWidth: '200px',
                     boxShadow: '0 4px 6px rgba(0, 0, 0, 0.3)',
-                    zIndex: 1000
+                    zIndex: 1000,
+                    border: '2px solid rgba(255, 255, 255, 0.1)'
                   }}
                 >
-                  {/* Punta de flecha */}
+                  {/* Punta de flecha tipo globo */}
                   <div
                     style={{
                       position: 'absolute',
-                      top: '-8px',
+                      top: '-10px',
+                      right: '14px',
+                      width: '0',
+                      height: '0',
+                      borderLeft: '10px solid transparent',
+                      borderRight: '10px solid transparent',
+                      borderBottom: `10px solid ${theme === 'dark' ? 'rgb(7, 21, 77)' : 'rgb(40, 80, 160)'}`
+                    }}
+                  />
+                  {/* Borde de la punta */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '-12px',
                       right: '12px',
                       width: '0',
                       height: '0',
-                      borderLeft: '8px solid transparent',
-                      borderRight: '8px solid transparent',
-                      borderBottom: `8px solid ${theme === 'dark' ? 'rgb(7, 21, 77)' : 'rgb(40, 80, 160)'}`
+                      borderLeft: '12px solid transparent',
+                      borderRight: '12px solid transparent',
+                      borderBottom: '12px solid rgba(255, 255, 255, 0.1)'
                     }}
                   />
-
+                  
                   <p
                     style={{
                       fontFamily: 'Arial, sans-serif',
@@ -159,7 +176,7 @@ export function MainMenu({ onLogoClick, onNavigate }: { onLogoClick: () => void;
                   >
                     {totalItems > 0 ? `Tienes ${totalItems} producto${totalItems > 1 ? 's' : ''}` : 'Carrito vacío'}
                   </p>
-
+                  
                   <button
                     onClick={() => totalItems > 0 && onNavigate('carrito')}
                     disabled={totalItems === 0}
@@ -174,7 +191,34 @@ export function MainMenu({ onLogoClick, onNavigate }: { onLogoClick: () => void;
                       fontFamily: 'Arial, sans-serif',
                       fontWeight: '500',
                       width: '100%',
-                      opacity: totalItems > 0 ? 1 : 0.6
+                      transition: 'all 0.25s ease',
+                      transform: 'scale(1)'
+                    }}
+                    onMouseEnter={(e) => {
+                      if (totalItems > 0) {
+                        e.currentTarget.style.backgroundColor = 'rgb(194, 143, 91)';
+                        e.currentTarget.style.transform = 'scale(1.05)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (totalItems > 0) {
+                        e.currentTarget.style.backgroundColor = 'rgb(154, 113, 71)';
+                        e.currentTarget.style.transform = 'scale(1)';
+                      }
+                    }}
+                    onTouchStart={(e) => {
+                      if (totalItems > 0) {
+                        e.currentTarget.style.backgroundColor = 'rgb(194, 143, 91)';
+                        e.currentTarget.style.transform = 'scale(1.05)';
+                      }
+                    }}
+                    onTouchEnd={(e) => {
+                      if (totalItems > 0) {
+                        setTimeout(() => {
+                          e.currentTarget.style.backgroundColor = 'rgb(154, 113, 71)';
+                          e.currentTarget.style.transform = 'scale(1)';
+                        }, 200);
+                      }
                     }}
                   >
                     Ver carrito
@@ -223,52 +267,86 @@ export function MainMenu({ onLogoClick, onNavigate }: { onLogoClick: () => void;
 
           {/* Buscador - Desktop */}
           <div style={{ paddingTop: '32px', paddingBottom: '32px', display: 'flex', justifyContent: 'center' }}>
-            <div style={{ width: '400px', display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <input
-                type="text"
-                placeholder="¿Qué está buscando?"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    handleSearch();
-                  }
-                }}
-                style={{
-                  backgroundColor: 'white',
-                  border: '1px solid rgb(200, 200, 200)',
-                  outline: 'none',
-                  transform: 'skewX(-10deg)',
-                  flex: '1',
-                  padding: '8px 16px',
-                  borderRadius: '4px',
-                }}
-              />
-              <button
-                onClick={handleSearch}
-                style={{
-                  backgroundColor: 'rgb(200, 200, 200)',
-                  transform: 'skewX(-10deg)',
-                  width: '40px',
-                  height: '40px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  border: 'none',
-                  borderRadius: '4px',
-                  cursor: 'pointer',
-                  flexShrink: '0',
-                  transition: 'opacity 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.opacity = '0.8';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.opacity = '1';
-                }}
-              >
-                <SearchIcon style={{ color: 'black', width: '20px', height: '20px' }} />
-              </button>
+            <div style={{ width: '400px', position: 'relative' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <input
+                  type="text"
+                  placeholder="¿Qué está buscando?"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      handleSearch();
+                    }
+                  }}
+                  onFocus={() => setSearchFocused(true)}
+                  onBlur={() => setTimeout(() => setSearchFocused(false), 200)}
+                  style={{
+                    backgroundColor: 'white',
+                    border: '1px solid rgb(200, 200, 200)',
+                    outline: 'none',
+                    transform: 'skewX(-10deg)',
+                    flex: '1',
+                    padding: '8px 16px',
+                    borderRadius: '4px',
+                  }}
+                />
+                <button
+                  onClick={handleSearch}
+                  style={{
+                    backgroundColor: 'rgb(200, 200, 200)',
+                    transform: 'skewX(-10deg)',
+                    width: '40px',
+                    height: '40px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    border: 'none',
+                    borderRadius: '4px',
+                    cursor: 'pointer',
+                    flexShrink: '0',
+                    transition: 'opacity 0.2s ease',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.opacity = '0.8';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.opacity = '1';
+                  }}
+                >
+                  <SearchIcon style={{ color: 'black', width: '20px', height: '20px' }} />
+                </button>
+              </div>
+              
+              {/* Botón búsqueda personalizada */}
+              {searchFocused && (
+                <div style={{ display: 'flex', justifyContent: 'center', marginTop: '8px' }}>
+                  <button
+                    onClick={() => setAdvancedSearchOpen(true)}
+                    style={{
+                      backgroundColor: 'transparent',
+                      color: 'white',
+                      border: '1px solid rgba(255, 255, 255, 0.3)',
+                      padding: '6px 16px',
+                      borderRadius: '4px',
+                      cursor: 'pointer',
+                      fontSize: '0.75rem',
+                      fontFamily: 'Arial, sans-serif',
+                      transition: 'all 0.25s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                      e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                      e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                    }}
+                  >
+                    Búsqueda personalizada
+                  </button>
+                </div>
+              )}
             </div>
           </div>
 
@@ -388,7 +466,7 @@ export function MainMenu({ onLogoClick, onNavigate }: { onLogoClick: () => void;
                       </span>
                     )}
                   </button>
-
+                  
                   {/* Preview del carrito - Mobile */}
                   {cartPreviewOpen && (
                     <div
@@ -420,7 +498,7 @@ export function MainMenu({ onLogoClick, onNavigate }: { onLogoClick: () => void;
                           borderBottom: `8px solid ${theme === 'dark' ? 'rgb(7, 21, 77)' : 'rgb(40, 80, 160)'}`
                         }}
                       />
-
+                      
                       <p
                         style={{
                           fontFamily: 'Arial, sans-serif',
@@ -432,7 +510,7 @@ export function MainMenu({ onLogoClick, onNavigate }: { onLogoClick: () => void;
                       >
                         {totalItems > 0 ? `Tienes ${totalItems} producto${totalItems > 1 ? 's' : ''}` : 'Carrito vacío'}
                       </p>
-
+                      
                       <button
                         onClick={() => {
                           if (totalItems > 0) {
@@ -453,7 +531,34 @@ export function MainMenu({ onLogoClick, onNavigate }: { onLogoClick: () => void;
                           fontFamily: 'Arial, sans-serif',
                           fontWeight: '500',
                           width: '100%',
-                          opacity: totalItems > 0 ? 1 : 0.6
+                          transition: 'all 0.25s ease',
+                          transform: 'scale(1)'
+                        }}
+                        onMouseEnter={(e) => {
+                          if (totalItems > 0) {
+                            e.currentTarget.style.backgroundColor = 'rgb(194, 143, 91)';
+                            e.currentTarget.style.transform = 'scale(1.05)';
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          if (totalItems > 0) {
+                            e.currentTarget.style.backgroundColor = 'rgb(154, 113, 71)';
+                            e.currentTarget.style.transform = 'scale(1)';
+                          }
+                        }}
+                        onTouchStart={(e) => {
+                          if (totalItems > 0) {
+                            e.currentTarget.style.backgroundColor = 'rgb(194, 143, 91)';
+                            e.currentTarget.style.transform = 'scale(1.05)';
+                          }
+                        }}
+                        onTouchEnd={(e) => {
+                          if (totalItems > 0) {
+                            setTimeout(() => {
+                              e.currentTarget.style.backgroundColor = 'rgb(154, 113, 71)';
+                              e.currentTarget.style.transform = 'scale(1)';
+                            }, 200);
+                          }
                         }}
                       >
                         Ver carrito
@@ -577,6 +682,36 @@ export function MainMenu({ onLogoClick, onNavigate }: { onLogoClick: () => void;
                       <SearchIcon style={{ color: 'black', width: '20px', height: '20px' }} />
                     </button>
                   </div>
+                  
+                  {/* Botón búsqueda personalizada - Mobile */}
+                  <div style={{ display: 'flex', justifyContent: 'center', marginTop: '8px' }}>
+                    <button
+                      onClick={() => setAdvancedSearchOpen(true)}
+                      style={{
+                        backgroundColor: 'transparent',
+                        color: 'white',
+                        border: '1px solid rgba(255, 255, 255, 0.3)',
+                        padding: '6px 16px',
+                        borderRadius: '4px',
+                        cursor: 'pointer',
+                        fontSize: '0.75rem',
+                        fontFamily: 'Arial, sans-serif',
+                        transition: 'all 0.25s ease'
+                      }}
+                      onTouchStart={(e) => {
+                        e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.5)';
+                      }}
+                      onTouchEnd={(e) => {
+                        setTimeout(() => {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                          e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.3)';
+                        }, 200);
+                      }}
+                    >
+                      Búsqueda personalizada
+                    </button>
+                  </div>
                 </div>
               )}
 
@@ -617,6 +752,11 @@ export function MainMenu({ onLogoClick, onNavigate }: { onLogoClick: () => void;
           </div>
         )}
       </div>
+      
+      {/* Modal de búsqueda avanzada */}
+      {advancedSearchOpen && (
+        <AdvancedSearchModal onClose={() => setAdvancedSearchOpen(false)} />
+      )}
     </nav>
   );
 }

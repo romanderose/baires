@@ -1,7 +1,7 @@
 import { useTheme } from "@/app/contexts/ThemeContext";
 import { useCart } from "@/app/contexts/CartContext";
 import { products } from "@/app/data/products";
-import noResultsImage from "@/assets/f8ea3e6252b6caff05141d12290eecc23226012f.png";
+import noResultsImage from "figma:asset/f8ea3e6252b6caff05141d12290eecc23226012f.png";
 
 interface SearchResultsProps {
   searchTerm: string;
@@ -27,15 +27,15 @@ export function SearchResults({ searchTerm, onNavigate }: SearchResultsProps) {
 
   return (
     <section className="max-w-7xl mx-auto py-12" style={{ paddingLeft: '1.5rem', paddingRight: '1.5rem' }}>
-      <div
+      <div 
         style={{
           backgroundColor: theme === 'dark' ? 'rgb(7, 21, 77)' : 'rgb(40, 80, 160)',
           borderRadius: '5px',
           padding: 'calc(2rem + 5px)'
         }}
       >
-        <h2
-          style={{
+        <h2 
+          style={{ 
             fontFamily: 'Arial, sans-serif',
             fontSize: '2rem',
             fontWeight: 'bold',
@@ -48,10 +48,10 @@ export function SearchResults({ searchTerm, onNavigate }: SearchResultsProps) {
         </h2>
 
         {hasResults ? (
-          <div
+          <div 
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(min(280px, 100%), 1fr))',
               gap: '1.5rem',
               padding: '0 15px'
             }}
@@ -66,7 +66,9 @@ export function SearchResults({ searchTerm, onNavigate }: SearchResultsProps) {
                   display: 'flex',
                   flexDirection: 'column',
                   gap: '0.75rem',
-                  border: '2px solid rgba(255, 255, 255, 0.1)'
+                  border: '2px solid rgba(255, 255, 255, 0.1)',
+                  boxSizing: 'border-box',
+                  maxWidth: '100%'
                 }}
               >
                 <img
@@ -79,7 +81,7 @@ export function SearchResults({ searchTerm, onNavigate }: SearchResultsProps) {
                     borderRadius: '8px'
                   }}
                 />
-
+                
                 <h3
                   style={{
                     fontFamily: 'Arial, sans-serif',
@@ -92,7 +94,7 @@ export function SearchResults({ searchTerm, onNavigate }: SearchResultsProps) {
                 >
                   {product.nombre}
                 </h3>
-
+                
                 <p
                   style={{
                     fontFamily: 'Arial, sans-serif',
@@ -104,9 +106,9 @@ export function SearchResults({ searchTerm, onNavigate }: SearchResultsProps) {
                 >
                   ${product.precio.toLocaleString('es-AR')}
                 </p>
-
-                <div
-                  style={{
+                
+                <div 
+                  style={{ 
                     borderTop: '2px solid rgba(255, 255, 255, 0.2)',
                     marginTop: '0.5rem',
                     paddingTop: '0.75rem'
@@ -143,35 +145,35 @@ export function SearchResults({ searchTerm, onNavigate }: SearchResultsProps) {
             ))}
           </div>
         ) : (
-          <div style={{
-            display: 'flex',
-            flexDirection: 'column',
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
             alignItems: 'center',
             justifyContent: 'center',
             minHeight: '400px',
             gap: '1rem'
           }}>
-            <div style={{
-              display: 'flex',
-              alignItems: 'center',
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
               justifyContent: 'center',
               width: '100%',
               paddingLeft: '1rem',
               paddingRight: '1rem'
             }}>
-              <img
-                src={noResultsImage}
-                alt="Sin resultados"
+              <img 
+                src={noResultsImage} 
+                alt="Sin resultados" 
                 className="max-w-[280px] md:max-w-[300px]"
-                style={{
+                style={{ 
                   width: '100%',
                   height: 'auto'
-                }}
+                }} 
               />
             </div>
-
-            <p
-              style={{
+            
+            <p 
+              style={{ 
                 fontFamily: 'Arial, sans-serif',
                 fontStyle: 'italic',
                 color: 'white',

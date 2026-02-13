@@ -1,22 +1,22 @@
 import { useTheme } from "@/app/contexts/ThemeContext";
-import aboutImage from "@/assets/f7e54600acdf3cc2217c9a85144f6e4558b0909c.png";
+import aboutImage from "figma:asset/f7e54600acdf3cc2217c9a85144f6e4558b0909c.png";
 
 export function AboutSection() {
   const { theme } = useTheme();
-
+  
   return (
     <section className="max-w-7xl mx-auto py-12" style={{ paddingLeft: '1.5rem', paddingRight: '1.5rem' }}>
-      <div
+      <div 
         style={{
           backgroundColor: theme === 'dark' ? 'rgb(7, 21, 77)' : 'rgb(40, 80, 160)',
           borderRadius: '5px',
           padding: '2rem'
         }}
       >
-        <h2
-          className="text-3xl font-bold mb-6 italic"
-          style={{
-            fontStyle: 'italic',
+        <h2 
+          className="text-3xl font-bold mb-6 italic" 
+          style={{ 
+            fontStyle: 'italic', 
             marginLeft: '15px',
             color: 'white'
           }}
@@ -25,20 +25,20 @@ export function AboutSection() {
         </h2>
         <div className="flex flex-col md:flex-row gap-6 md:items-center">
           <div className="md:hidden w-full">
-            <img
-              src={aboutImage}
-              alt="Baires Suspensión - Instalaciones y servicios"
-              style={{
-                width: '100%',
+            <img 
+              src={aboutImage} 
+              alt="Baires Suspensión - Instalaciones y servicios" 
+              style={{ 
+                width: '100%', 
                 height: 'auto',
                 borderRadius: '5px'
               }}
             />
           </div>
-          <p
-            className="leading-relaxed flex-1"
-            style={{
-              marginLeft: '15px',
+          <p 
+            className="leading-relaxed flex-1" 
+            style={{ 
+              marginLeft: '15px', 
               marginRight: '15px',
               color: 'white'
             }}
@@ -52,11 +52,11 @@ export function AboutSection() {
             Confiá en Baires Suspensión para el cuidado y mantenimiento de tu vehículo.
           </p>
           <div className="hidden md:block md:w-1/3">
-            <img
-              src={aboutImage}
-              alt="Baires Suspensión - Instalaciones y servicios"
-              style={{
-                width: '100%',
+            <img 
+              src={aboutImage} 
+              alt="Baires Suspensión - Instalaciones y servicios" 
+              style={{ 
+                width: '100%', 
                 height: 'auto',
                 borderRadius: '5px'
               }}

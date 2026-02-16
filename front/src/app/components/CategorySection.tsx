@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { useTheme } from "@/app/contexts/ThemeContext";
 import { products } from "@/app/data/products";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface CategorySectionProps {
   category: string;
@@ -8,7 +10,14 @@ interface CategorySectionProps {
 
 export function CategorySection({ category, onNavigate }: CategorySectionProps) {
   const { theme } = useTheme();
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10;
+
   const categoryProducts = products.filter(p => p.categoria === category);
+  const totalPages = Math.ceil(categoryProducts.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const currentProducts = categoryProducts.slice(startIndex, endIndex);
 
   return (
     <section className="max-w-7xl mx-auto py-12" style={{ paddingLeft: '1.5rem', paddingRight: '1.5rem' }}>
@@ -39,8 +48,26 @@ export function CategorySection({ category, onNavigate }: CategorySectionProps) 
             gap: '1.5rem',
             padding: '0 15px'
           }}
+          className="products-grid"
         >
-          {categoryProducts.map((product) => (
+          <style>{`
+            @media (min-width: 1024px) {
+              .products-grid {
+                grid-template-columns: repeat(3, 1fr) !important;
+              }
+            }
+            @media (max-width: 1023px) and (min-width: 640px) {
+              .products-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+              }
+            }
+            @media (max-width: 639px) {
+              .products-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+              }
+            }
+          `}</style>
+          {currentProducts.map((product) => (
             <div
               key={product.id}
               style={{
@@ -128,6 +155,75 @@ export function CategorySection({ category, onNavigate }: CategorySectionProps) 
             </div>
           ))}
         </div>
+
+        {/* Paginación */}
+        {totalPages > 1 && (
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', marginTop: '2rem' }}>
+            <button
+              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+              disabled={currentPage === 1}
+              style={{
+                backgroundColor: currentPage === 1 ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.2)',
+                color: 'white',
+                border: '1px solid rgba(255, 255, 255, 0.3)',
+                borderRadius: '5px',
+                padding: '0.5rem',
+                cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                opacity: currentPage === 1 ? 0.5 : 1,
+                transition: 'all 0.2s ease'
+              }}
+              onMouseEnter={(e) => {
+                if (currentPage !== 1) {
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (currentPage !== 1) {
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                }
+              }}
+            >
+              <ChevronLeft style={{ width: '20px', height: '20px' }} />
+            </button>
+
+            <span style={{ color: 'white', fontFamily: 'Arial, sans-serif', fontSize: '1rem' }}>
+              Página {currentPage} de {totalPages}
+            </span>
+
+            <button
+              onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+              disabled={currentPage === totalPages}
+              style={{
+                backgroundColor: currentPage === totalPages ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.2)',
+                color: 'white',
+                border: '1px solid rgba(255, 255, 255, 0.3)',
+                borderRadius: '5px',
+                padding: '0.5rem',
+                cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                opacity: currentPage === totalPages ? 0.5 : 1,
+                transition: 'all 0.2s ease'
+              }}
+              onMouseEnter={(e) => {
+                if (currentPage !== totalPages) {
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.3)';
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (currentPage !== totalPages) {
+                  e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.2)';
+                }
+              }}
+            >
+              <ChevronRight style={{ width: '20px', height: '20px' }} />
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );

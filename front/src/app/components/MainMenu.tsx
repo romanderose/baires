@@ -87,11 +87,11 @@ export function MainMenu({ onLogoClick, onNavigate }: { onLogoClick: () => void;
               onMouseLeave={() => setCartPreviewOpen(false)}
             >
               <button
-                onClick={() => totalItems > 0 && onNavigate('carrito')}
+                onClick={() => setCartPreviewOpen(!cartPreviewOpen)}
                 style={{
                   backgroundColor: 'transparent',
                   border: 'none',
-                  cursor: totalItems > 0 ? 'pointer' : 'default',
+                  cursor: 'pointer',
                   position: 'relative',
                   padding: '4px'
                 }}
@@ -178,7 +178,12 @@ export function MainMenu({ onLogoClick, onNavigate }: { onLogoClick: () => void;
                   </p>
                   
                   <button
-                    onClick={() => totalItems > 0 && onNavigate('carrito')}
+                    onClick={() => {
+                      if (totalItems > 0) {
+                        onNavigate('carrito');
+                        window.location.reload();
+                      }
+                    }}
                     disabled={totalItems === 0}
                     style={{
                       backgroundColor: totalItems > 0 ? 'rgb(154, 113, 71)' : 'rgb(100, 100, 100)',
@@ -515,6 +520,7 @@ export function MainMenu({ onLogoClick, onNavigate }: { onLogoClick: () => void;
                         onClick={() => {
                           if (totalItems > 0) {
                             onNavigate('carrito');
+                            window.location.reload();
                             setCartPreviewOpen(false);
                             setMobileMenuOpen(false);
                           }

@@ -60,49 +60,42 @@ export function AdvancedSearchResults({ onNavigate, filters }: AdvancedSearchRes
   const endIndex = startIndex + itemsPerPage;
   const currentProducts = filteredProducts.slice(startIndex, endIndex);
 
+  const hasResults = filteredProducts.length > 0;
+
   return (
     <section className="max-w-7xl mx-auto py-12" style={{ paddingLeft: '1.5rem', paddingRight: '1.5rem' }}>
       <div 
         style={{
           backgroundColor: theme === 'dark' ? 'rgb(7, 21, 77)' : 'rgb(40, 80, 160)',
           borderRadius: '5px',
-          padding: 'calc(2rem + 5px)'
+          padding: 'calc(2rem + 5px)',
+          minHeight: '800px',
+          display: 'flex',
+          flexDirection: 'column'
         }}
       >
-        <h1 
+        <h2 
           style={{ 
             fontFamily: 'Arial, sans-serif',
             fontSize: '2rem',
             fontWeight: 'bold',
             color: 'white',
-            marginBottom: '2rem',
+            marginBottom: '1.5rem',
             marginLeft: '15px'
           }}
         >
-          Resultados de: búsqueda personalizada
-        </h1>
+          Resultados de búsqueda personalizada
+        </h2>
 
-        {filteredProducts.length === 0 ? (
-          <p 
-            style={{ 
-              fontFamily: 'Arial, sans-serif',
-              fontSize: '1.25rem',
-              color: 'white',
-              textAlign: 'center',
-              padding: '2rem',
-              margin: 0
-            }}
-          >
-            No se encontraron productos que coincidan con los criterios de búsqueda.
-          </p>
-        ) : (
+        {hasResults ? (
           <>
             <div 
               style={{
                 display: 'grid',
                 gridTemplateColumns: 'repeat(auto-fill, minmax(min(280px, 100%), 1fr))',
                 gap: '1.5rem',
-                padding: '0 15px'
+                padding: '0 15px',
+                flex: '1 0 auto'
               }}
               className="products-grid"
             >
@@ -122,9 +115,16 @@ export function AdvancedSearchResults({ onNavigate, filters }: AdvancedSearchRes
                     grid-template-columns: repeat(2, 1fr) !important;
                   }
                 }
-                @media (max-width: 470px) {
+                @media (max-width: 450px) {
                   .products-grid {
-                    padding: 0 !important;
+                    padding: 0 5px !important;
+                    gap: 0.75rem !important;
+                  }
+                  .products-grid > div {
+                    padding: 0.75rem !important;
+                  }
+                  .products-grid img {
+                    height: 150px !important;
                   }
                 }
               `}</style>
@@ -286,6 +286,19 @@ export function AdvancedSearchResults({ onNavigate, filters }: AdvancedSearchRes
               </div>
             )}
           </>
+        ) : (
+          <p 
+            style={{ 
+              fontFamily: 'Arial, sans-serif',
+              fontSize: '1.25rem',
+              color: 'white',
+              textAlign: 'center',
+              padding: '2rem',
+              margin: 0
+            }}
+          >
+            No se encontraron productos que coincidan con los criterios de búsqueda.
+          </p>
         )}
       </div>
     </section>

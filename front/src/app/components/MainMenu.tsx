@@ -180,8 +180,7 @@ export function MainMenu({ onLogoClick, onNavigate }: { onLogoClick: () => void;
                   <button
                     onClick={() => {
                       if (totalItems > 0) {
-                        onNavigate('carrito');
-                        window.location.reload();
+                        window.location.href = '/?section=carrito';
                       }
                     }}
                     disabled={totalItems === 0}
@@ -519,8 +518,7 @@ export function MainMenu({ onLogoClick, onNavigate }: { onLogoClick: () => void;
                       <button
                         onClick={() => {
                           if (totalItems > 0) {
-                            onNavigate('carrito');
-                            window.location.reload();
+                            window.location.href = '/?section=carrito';
                             setCartPreviewOpen(false);
                             setMobileMenuOpen(false);
                           }

@@ -24,6 +24,7 @@ function MainContent() {
   const searchParams = new URLSearchParams(window.location.search);
   const initialSearchTerm = searchParams.get('search') || '';
   const isAdvancedSearch = searchParams.get('advanced') === 'true';
+  const initialSection = searchParams.get('section') || '';
 
   // Obtener filtros de búsqueda avanzada
   const advancedFilters = {
@@ -36,24 +37,24 @@ function MainContent() {
 
   // Estado de navegación
   const [currentSection, setCurrentSection] = useState<string>(
-    isAdvancedSearch ? 'busqueda-avanzada' : (initialSearchTerm ? 'busqueda' : 'home')
+    initialSection || (isAdvancedSearch ? 'busqueda-avanzada' : (initialSearchTerm ? 'busqueda' : 'home'))
   );
   const [searchTerm, setSearchTerm] = useState<string>(initialSearchTerm);
   const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
   const [previousSection, setPreviousSection] = useState<string>('home');
 
-  // Mostrar splash solo si NO hay búsqueda inicial
-  const [showSplash, setShowSplash] = useState(!initialSearchTerm && !isAdvancedSearch);
+  // Mostrar splash solo si NO hay búsqueda inicial ni sección inicial
+  const [showSplash, setShowSplash] = useState(!initialSearchTerm && !isAdvancedSearch && !initialSection);
 
   useEffect(() => {
-    if (showSplash && !initialSearchTerm && !isAdvancedSearch) {
+    if (showSplash && !initialSearchTerm && !isAdvancedSearch && !initialSection) {
       const timer = setTimeout(() => {
         setShowSplash(false);
       }, 5000);
 
       return () => clearTimeout(timer);
     }
-  }, [showSplash, initialSearchTerm, isAdvancedSearch]);
+  }, [showSplash, initialSearchTerm, isAdvancedSearch, initialSection]);
 
   const resetToHome = () => {
     setCurrentSection('home');
@@ -84,7 +85,7 @@ function MainContent() {
     setSelectedProductId(null);
   };
 
-  if (showSplash && !initialSearchTerm && !isAdvancedSearch) {
+  if (showSplash && !initialSearchTerm && !isAdvancedSearch && !initialSection) {
     return <SplashScreen />;
   }
 

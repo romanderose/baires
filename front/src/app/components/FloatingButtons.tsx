@@ -15,7 +15,7 @@ export function FloatingButtons() {
       <style>{`
         @media (min-width: 1024px) {
           .floating-buttons-container {
-            right: 25px !important;
+            right: 30px !important;
           }
         }
       `}</style>

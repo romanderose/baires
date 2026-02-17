@@ -1,27 +1,52 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 import { Toast } from "@/app/components/Toast";
 
+interface ToastData {
+  id: number;
+  productName: string;
+}
+
 interface ToastContextType {
-  showToast: () => void;
+  showToast: (productName: string) => void;
 }
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
 export function ToastProvider({ children }: { children: ReactNode }) {
-  const [isVisible, setIsVisible] = useState(false);
+  const [toasts, setToasts] = useState<ToastData[]>([]);
+  const [nextId, setNextId] = useState(0);
 
-  const showToast = () => {
-    setIsVisible(true);
+  const showToast = (productName: string) => {
+    const id = nextId;
+    setNextId(prev => prev + 1);
+    setToasts(prev => [...prev, { id, productName }]);
   };
 
-  const hideToast = () => {
-    setIsVisible(false);
+  const removeToast = (id: number) => {
+    setToasts(prev => prev.filter(toast => toast.id !== id));
   };
 
   return (
     <ToastContext.Provider value={{ showToast }}>
       {children}
-      {isVisible && <Toast onClose={hideToast} />}
+      <div style={{
+        position: 'fixed',
+        top: '20px',
+        right: '20px',
+        zIndex: 9999,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '10px',
+        pointerEvents: 'none'
+      }}>
+        {toasts.map(toast => (
+          <Toast 
+            key={toast.id} 
+            productName={toast.productName}
+            onClose={() => removeToast(toast.id)} 
+          />
+        ))}
+      </div>
     </ToastContext.Provider>
   );
 }

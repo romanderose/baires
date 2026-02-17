@@ -150,7 +150,7 @@ export function ProductDetails({ productId, onBack }: ProductDetailsProps) {
                   <button
                     onClick={() => {
                       addToCart(product);
-                      showToast();
+                      showToast(product.nombre);
                     }}
                     style={{
                       backgroundColor: 'rgb(154, 113, 71)',

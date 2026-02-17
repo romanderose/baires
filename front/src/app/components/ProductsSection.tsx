@@ -23,7 +23,10 @@ export function ProductsSection({ onNavigate }: ProductsSectionProps) {
         style={{
           backgroundColor: theme === 'dark' ? 'rgb(7, 21, 77)' : 'rgb(40, 80, 160)',
           borderRadius: '5px',
-          padding: 'calc(2rem + 5px)'
+          padding: 'calc(2rem + 5px)',
+          minHeight: '800px',
+          display: 'flex',
+          flexDirection: 'column'
         }}
       >
         <h1 
@@ -44,7 +47,8 @@ export function ProductsSection({ onNavigate }: ProductsSectionProps) {
             display: 'grid',
             gridTemplateColumns: 'repeat(auto-fill, minmax(min(280px, 100%), 1fr))',
             gap: '1.5rem',
-            padding: '0 15px'
+            padding: '0 15px',
+            flex: '1 0 auto'
           }}
           className="products-grid"
         >
@@ -64,9 +68,16 @@ export function ProductsSection({ onNavigate }: ProductsSectionProps) {
                 grid-template-columns: repeat(2, 1fr) !important;
               }
             }
-            @media (max-width: 470px) {
+            @media (max-width: 450px) {
               .products-grid {
-                padding: 0 !important;
+                padding: 0 5px !important;
+                gap: 0.75rem !important;
+              }
+              .products-grid > div {
+                padding: 0.75rem !important;
+              }
+              .products-grid img {
+                height: 150px !important;
               }
             }
           `}</style>

@@ -79,6 +79,11 @@ export function SearchResults({ searchTerm, onNavigate }: SearchResultsProps) {
                     grid-template-columns: repeat(2, 1fr) !important;
                   }
                 }
+                @media (max-width: 470px) {
+                  .products-grid {
+                    padding: 0 !important;
+                  }
+                }
               `}</style>
               {currentProducts.map((product) => (
                 <div

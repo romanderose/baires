@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useTheme } from "@/app/contexts/ThemeContext";
 import { useCart } from "@/app/contexts/CartContext";
 import { useToast } from "@/app/contexts/ToastContext";
@@ -13,10 +14,13 @@ export function ProductDetails({ productId, onBack }: ProductDetailsProps) {
   const { addToCart } = useCart();
   const { showToast } = useToast();
   const product = products.find(p => p.id === productId);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
   if (!product) {
     return null;
   }
+
+  const currentImage = product.imagenes[selectedImageIndex];
 
   return (
     <section className="max-w-7xl mx-auto py-12" style={{ paddingLeft: '1.5rem', paddingRight: '1.5rem' }}>
@@ -53,17 +57,58 @@ export function ProductDetails({ productId, onBack }: ProductDetailsProps) {
               width: '100%'
             }}
           >
-            <img
-              src={product.imagen}
-              alt={product.nombre}
-              style={{
-                width: '100%',
-                height: 'auto',
-                maxHeight: '400px',
-                objectFit: 'cover',
-                borderRadius: '8px'
-              }}
-            />
+            {/* Contenedor de imagen con thumbnails */}
+            <div style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}>
+              {/* Columna de thumbnails */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                {product.imagenes.map((img, index) => (
+                  <img
+                    key={index}
+                    src={img}
+                    alt={`${product.nombre} - Vista ${index + 1}`}
+                    onClick={() => setSelectedImageIndex(index)}
+                    style={{
+                      width: '60px',
+                      height: '60px',
+                      objectFit: 'cover',
+                      borderRadius: '4px',
+                      cursor: 'pointer',
+                      border: selectedImageIndex === index 
+                        ? '2px solid white' 
+                        : '2px solid rgba(255, 255, 255, 0.3)',
+                      opacity: selectedImageIndex === index ? 1 : 0.6,
+                      transition: 'all 0.2s ease'
+                    }}
+                    onMouseEnter={(e) => {
+                      if (selectedImageIndex !== index) {
+                        e.currentTarget.style.opacity = '0.8';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (selectedImageIndex !== index) {
+                        e.currentTarget.style.opacity = '0.6';
+                      }
+                    }}
+                  />
+                ))}
+              </div>
+
+              {/* Imagen principal */}
+              <img
+                src={currentImage}
+                alt={product.nombre}
+                style={{
+                  flex: 1,
+                  width: '100%',
+                  height: 'auto',
+                  maxHeight: '400px',
+                  objectFit: 'cover',
+                  borderRadius: '8px',
+                  border: '1px solid rgba(255, 255, 255, 0.2)',
+                  boxSizing: 'border-box'
+                }}
+              />
+            </div>
             
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <h2

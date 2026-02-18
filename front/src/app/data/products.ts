@@ -1,6 +1,15 @@
 import frenosImage from "figma:asset/273e882707501612efd523379e909a6e36c0e141.png";
+import frenos2 from "figma:asset/e4ec903e8efee275b49cf6bc173156c55d5f1051.png";
+import frenos3 from "figma:asset/17cd057c25c6873f9ba11bf310977fbfda78ce8d.png";
+import frenos4 from "figma:asset/7b006ecdf3145b2dd3ff1ecef477a00634d30530.png";
 import embraguesImage from "figma:asset/f7c072c174116276b25e0ade877579ae74e65732.png";
+import embragues2 from "figma:asset/944f4b8065ade7f19d3fc589247cf9a440ca8b7a.png";
+import embragues3 from "figma:asset/af760f72bcc051d3ea6bc41b928e2a7100151f8e.png";
+import embragues4 from "figma:asset/e070c322bfbf4e101a49a5618a8ae56f781d9a76.png";
 import distribucionImage from "figma:asset/cc1e9a858d3d8e3cb43aa8d928192707586bd19d.png";
+import distribucion2 from "figma:asset/77d7b7f6ed1d15e2da3bfc75c2b41f921e0e3649.png";
+import distribucion3 from "figma:asset/5a1f0d62cb38c93ed1e1863acc1db9566ee2699e.png";
+import distribucion4 from "figma:asset/87dce76b388d97268ce0ab0054e95db8932a5ede.png";
 
 export interface Product {
   id: number;
@@ -8,6 +17,7 @@ export interface Product {
   marca: string;
   precio: number;
   imagen: string;
+  imagenes: string[];
   estado: string;
   categoria: string;
   descripcion: string;
@@ -21,6 +31,7 @@ export const products: Product[] = [
     marca: "Bosch",
     precio: 38500,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Pastillas de alta calidad para frenado seguro y eficiente."
@@ -31,6 +42,7 @@ export const products: Product[] = [
     marca: "Brembo",
     precio: 72900,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Disco ventilado para mejor disipación de calor."
@@ -41,6 +53,7 @@ export const products: Product[] = [
     marca: "Ferodo",
     precio: 29800,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Pastillas traseras de larga duración y bajo ruido."
@@ -51,6 +64,7 @@ export const products: Product[] = [
     marca: "TRW",
     precio: 54200,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Cilindro maestro para presión hidráulica óptima."
@@ -61,6 +75,7 @@ export const products: Product[] = [
     marca: "ATE",
     precio: 45600,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Pastillas cerámicas de última generación, menos polvo."
@@ -71,6 +86,7 @@ export const products: Product[] = [
     marca: "Bosch",
     precio: 98300,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Kit completo delantero con discos y pastillas."
@@ -81,6 +97,7 @@ export const products: Product[] = [
     marca: "Castrol",
     precio: 8900,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Líquido de frenos de alta temperatura."
@@ -91,6 +108,7 @@ export const products: Product[] = [
     marca: "Bendix",
     precio: 125400,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Servo de alta eficiencia para mejor respuesta."
@@ -101,6 +119,7 @@ export const products: Product[] = [
     marca: "Valeo",
     precio: 48700,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Tambor reforzado con acabado anticorrosión."
@@ -111,6 +130,7 @@ export const products: Product[] = [
     marca: "TRW",
     precio: 16800,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Cable de acero trenzado con recubrimiento."
@@ -121,6 +141,7 @@ export const products: Product[] = [
     marca: "Brembo",
     precio: 89500,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Mordaza de aluminio de alta resistencia."
@@ -131,6 +152,7 @@ export const products: Product[] = [
     marca: "ATE",
     precio: 12300,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Kit completo con retenes y pistones."
@@ -141,6 +163,7 @@ export const products: Product[] = [
     marca: "EBC",
     precio: 95800,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Disco perforado para alta performance."
@@ -151,6 +174,7 @@ export const products: Product[] = [
     marca: "Ferodo",
     precio: 42100,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Pastillas metálicas para uso intensivo."
@@ -161,6 +185,7 @@ export const products: Product[] = [
     marca: "Bendix",
     precio: 34900,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Bomba hidráulica de precisión."
@@ -171,6 +196,7 @@ export const products: Product[] = [
     marca: "Goodridge",
     precio: 28600,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Manguera trenzada de acero inoxidable."
@@ -181,6 +207,7 @@ export const products: Product[] = [
     marca: "Bosch",
     precio: 7400,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Sensor electrónico de alta precisión."
@@ -191,6 +218,7 @@ export const products: Product[] = [
     marca: "TRW",
     precio: 38900,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Disco trasero macizo económico."
@@ -201,6 +229,7 @@ export const products: Product[] = [
     marca: "Ferodo",
     precio: 31200,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Zapatas de tambor de larga vida útil."
@@ -211,6 +240,7 @@ export const products: Product[] = [
     marca: "ATE",
     precio: 24800,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Válvula para distribución óptima de presión."
@@ -221,6 +251,7 @@ export const products: Product[] = [
     marca: "Castrol",
     precio: 15600,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Kit profesional con bomba de vacío."
@@ -231,6 +262,7 @@ export const products: Product[] = [
     marca: "EBC",
     precio: 36700,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Pastillas orgánicas para conducción suave."
@@ -241,6 +273,7 @@ export const products: Product[] = [
     marca: "Brembo",
     precio: 145300,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Caliper de aluminio con acabado pintado."
@@ -251,6 +284,7 @@ export const products: Product[] = [
     marca: "EBC",
     precio: 87400,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Disco con ranuras para evacuación de gases."
@@ -261,6 +295,7 @@ export const products: Product[] = [
     marca: "Bosch",
     precio: 234500,
     imagen: frenosImage,
+    imagenes: [frenosImage, frenos2, frenos3, frenos4],
     estado: "disponible",
     categoria: "Frenos",
     descripcion: "Sistema antibloqueo de última generación."
@@ -272,6 +307,7 @@ export const products: Product[] = [
     marca: "Luk",
     precio: 145000,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Kit completo con disco, plato y rulemán de empuje."
@@ -282,6 +318,7 @@ export const products: Product[] = [
     marca: "Sachs",
     precio: 89600,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Disco reforzado para uso exigente y alta performance."
@@ -292,6 +329,7 @@ export const products: Product[] = [
     marca: "Valeo",
     precio: 34200,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Rulemán de precisión para accionamiento suave del embrague."
@@ -302,6 +340,7 @@ export const products: Product[] = [
     marca: "Luk",
     precio: 72400,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Plato de presión de alta calidad."
@@ -312,6 +351,7 @@ export const products: Product[] = [
     marca: "Sachs",
     precio: 15800,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Cable regulable para accionamiento preciso."
@@ -322,6 +362,7 @@ export const products: Product[] = [
     marca: "Valeo",
     precio: 187500,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Kit deportivo para máxima transferencia de potencia."
@@ -332,6 +373,7 @@ export const products: Product[] = [
     marca: "TRW",
     precio: 42300,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Cilindro hidráulico de alta presión."
@@ -342,6 +384,7 @@ export const products: Product[] = [
     marca: "Valeo",
     precio: 38900,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Cilindro receptor con accionamiento suave."
@@ -352,6 +395,7 @@ export const products: Product[] = [
     marca: "Sachs",
     precio: 76500,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Disco con material orgánico de larga duración."
@@ -362,6 +406,7 @@ export const products: Product[] = [
     marca: "Luk",
     precio: 245800,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Kit cerámico para máxima resistencia térmica."
@@ -372,6 +417,7 @@ export const products: Product[] = [
     marca: "Valeo",
     precio: 18700,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Horquilla metálica reforzada."
@@ -382,6 +428,7 @@ export const products: Product[] = [
     marca: "TRW",
     precio: 12400,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Manguera flexible de alta presión."
@@ -392,6 +439,7 @@ export const products: Product[] = [
     marca: "Sachs",
     precio: 312500,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Sistema bidisco para altas prestaciones."
@@ -402,6 +450,7 @@ export const products: Product[] = [
     marca: "Luk",
     precio: 198600,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Volante bimasa para reducción de vibraciones."
@@ -412,6 +461,7 @@ export const products: Product[] = [
     marca: "Valeo",
     precio: 98700,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Kit básico de buena calidad y precio accesible."
@@ -422,6 +472,7 @@ export const products: Product[] = [
     marca: "Bosch",
     precio: 9800,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Sensor electrónico de posición."
@@ -432,6 +483,7 @@ export const products: Product[] = [
     marca: "Sachs",
     precio: 124300,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Plato con sistema autopresionante."
@@ -442,6 +494,7 @@ export const products: Product[] = [
     marca: "Luk",
     precio: 95400,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Disco con sistema de amortiguación integrado."
@@ -452,6 +505,7 @@ export const products: Product[] = [
     marca: "Valeo",
     precio: 167800,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Kit especial para motores diesel de alto torque."
@@ -462,6 +516,7 @@ export const products: Product[] = [
     marca: "Sachs",
     precio: 54600,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Collarin con accionamiento hidráulico integrado."
@@ -472,6 +527,7 @@ export const products: Product[] = [
     marca: "TRW",
     precio: 5600,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Resorte de retorno de alta resistencia."
@@ -482,6 +538,7 @@ export const products: Product[] = [
     marca: "Luk",
     precio: 289400,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Sistema multidisco para competición."
@@ -492,6 +549,7 @@ export const products: Product[] = [
     marca: "Valeo",
     precio: 276300,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Kit completo con volante motor incluido."
@@ -502,6 +560,7 @@ export const products: Product[] = [
     marca: "Sachs",
     precio: 98500,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Plato reforzado para uso intensivo."
@@ -512,6 +571,7 @@ export const products: Product[] = [
     marca: "Luk",
     precio: 185700,
     imagen: embraguesImage,
+    imagenes: [embraguesImage, embragues2, embragues3, embragues4],
     estado: "disponible",
     categoria: "Embragues",
     descripcion: "Sistema completo con cilindros y mangueras."
@@ -523,6 +583,7 @@ export const products: Product[] = [
     marca: "Gates",
     precio: 112400,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Kit completo con correa, tensor y polea."
@@ -533,6 +594,7 @@ export const products: Product[] = [
     marca: "Dayco",
     precio: 41900,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Correa de alta resistencia para sincronización perfecta."
@@ -543,6 +605,7 @@ export const products: Product[] = [
     marca: "SKF",
     precio: 76300,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Bomba de agua con polea integrada para mayor durabilidad."
@@ -553,6 +616,7 @@ export const products: Product[] = [
     marca: "INA",
     precio: 28600,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Tensor automático de alta precisión."
@@ -563,6 +627,7 @@ export const products: Product[] = [
     marca: "Gates",
     precio: 19200,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Polea loca para correcto tensado de correa."
@@ -573,6 +638,7 @@ export const products: Product[] = [
     marca: "Dayco",
     precio: 156700,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Kit premium con bomba de agua incluida."
@@ -583,6 +649,7 @@ export const products: Product[] = [
     marca: "Continental",
     precio: 12400,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Correa auxiliar para accesorios del motor."
@@ -593,6 +660,7 @@ export const products: Product[] = [
     marca: "Febi",
     precio: 187900,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Kit completo con cadena, tensores y guías."
@@ -603,6 +671,7 @@ export const products: Product[] = [
     marca: "INA",
     precio: 45600,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Tensor hidráulico automático para cadena."
@@ -613,6 +682,7 @@ export const products: Product[] = [
     marca: "Febi",
     precio: 18700,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Guía plástica reforzada con fibra."
@@ -623,6 +693,7 @@ export const products: Product[] = [
     marca: "Gates",
     precio: 34800,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Polea de cigüeñal con damper integrado."
@@ -633,6 +704,7 @@ export const products: Product[] = [
     marca: "Contitech",
     precio: 142300,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Kit reforzado para motores diesel."
@@ -643,6 +715,7 @@ export const products: Product[] = [
     marca: "Dayco",
     precio: 8900,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Correa trapezoidal para alternador."
@@ -653,6 +726,7 @@ export const products: Product[] = [
     marca: "INA",
     precio: 32400,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Tensor automático para correas auxiliares."
@@ -663,6 +737,7 @@ export const products: Product[] = [
     marca: "Bosch",
     precio: 124600,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Bomba de agua con motor eléctrico."
@@ -673,6 +748,7 @@ export const products: Product[] = [
     marca: "Gates",
     precio: 178500,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Kit completo con termostato y juntas."
@@ -683,6 +759,7 @@ export const products: Product[] = [
     marca: "Iwis",
     precio: 95700,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Cadena de baja fricción y bajo ruido."
@@ -693,6 +770,7 @@ export const products: Product[] = [
     marca: "Dayco",
     precio: 15800,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Tensor de ajuste manual económico."
@@ -703,6 +781,7 @@ export const products: Product[] = [
     marca: "Gates",
     precio: 234700,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Kit de alta performance para competición."
@@ -713,6 +792,7 @@ export const products: Product[] = [
     marca: "INA",
     precio: 42300,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Polea con desacople para alternador."
@@ -723,6 +803,7 @@ export const products: Product[] = [
     marca: "Contitech",
     precio: 48900,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Correa con fibra de kevlar reforzada."
@@ -733,6 +814,7 @@ export const products: Product[] = [
     marca: "Elring",
     precio: 23400,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Juego completo de juntas y retenes."
@@ -743,6 +825,7 @@ export const products: Product[] = [
     marca: "Febi",
     precio: 87600,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Bomba de aceite con cadena de accionamiento."
@@ -753,6 +836,7 @@ export const products: Product[] = [
     marca: "Gates",
     precio: 56700,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Piñón con sistema de ajuste variable."
@@ -763,6 +847,7 @@ export const products: Product[] = [
     marca: "SKF",
     precio: 298400,
     imagen: distribucionImage,
+    imagenes: [distribucionImage, distribucion2, distribucion3, distribucion4],
     estado: "disponible",
     categoria: "Distribución",
     descripcion: "Kit premium con todos los componentes y herramientas."

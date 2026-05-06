@@ -1,6 +1,4 @@
 import { useTheme } from "@/app/contexts/ThemeContext";
-import { useState } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import logo1 from "figma:asset/e3a8fdc85a5b11be108a4a24e7ac6c14d9a73cb7.png";
 import logo2 from "figma:asset/2af4aeb883bf02eb8f6c556065f3e10b29c4fa88.png";
 import logo3 from "figma:asset/9637ac1ce03530d63aa6d35e3b724e36ea114e8a.png";
@@ -31,224 +29,133 @@ interface BrandsSectionProps {
   onNavigate: (section: string) => void;
 }
 
+const logos = [
+  logo1, logo2, logo3, logo4, logo5, logo6, logo7, logo8, logo9, logo10,
+  logo11, logo12, logo13, logo14, logo15, logo16, logo17, logo18, logo19, logo20,
+  logo21, logo22, logo23, logo24, logo25
+];
+
+// Duplicado para loop infinito sin saltos
+const track = [...logos, ...logos];
+
 export function BrandsSection({ onNavigate }: BrandsSectionProps) {
   const { theme } = useTheme();
-  const [currentGroup, setCurrentGroup] = useState(0);
-  
-  // Array de 25 logos ordenados
-  const logos = [
-    logo1, logo2, logo3, logo4, logo5, logo6, logo7, logo8, logo9, logo10,
-    logo11, logo12, logo13, logo14, logo15, logo16, logo17, logo18, logo19, logo20,
-    logo21, logo22, logo23, logo24, logo25
-  ];
-  
-  // Dividir en grupos de 5
-  const groupSize = 5;
-  const totalGroups = Math.ceil(logos.length / groupSize);
-  const currentLogos = logos.slice(currentGroup * groupSize, (currentGroup + 1) * groupSize);
-  
-  const goToPrevious = () => {
-    if (currentGroup > 0) {
-      setCurrentGroup((prev) => prev - 1);
-    }
-  };
-  
-  const goToNext = () => {
-    if (currentGroup < totalGroups - 1) {
-      setCurrentGroup((prev) => prev + 1);
-    }
-  };
-  
+
   return (
     <section className="max-w-7xl mx-auto pb-12" style={{ paddingLeft: '1.5rem', paddingRight: '1.5rem' }}>
-      <div 
+      <div
         style={{
           backgroundColor: theme === 'dark' ? 'rgb(7, 21, 77)' : 'rgb(40, 80, 160)',
           borderRadius: '5px',
           padding: 'calc(2rem + 5px)'
         }}
       >
-        <h2 
-          className="text-3xl font-bold mb-6 italic" 
-          style={{ 
-            fontStyle: 'italic', 
+        <h2
+          className="text-3xl font-bold mb-6 italic"
+          style={{
+            fontStyle: 'italic',
             marginLeft: '15px',
             color: 'white'
           }}
         >
           Marcas con las que trabajamos
         </h2>
-        <p 
-          className="leading-relaxed mb-6" 
-          style={{ 
-            marginLeft: '15px', 
+        <p
+          className="leading-relaxed mb-6"
+          style={{
+            marginLeft: '15px',
             marginRight: '15px',
             color: 'white'
           }}
         >
           Trabajamos con una amplia variedad de marcas reconocidas del mercado del automotor. Ofrecemos repuestos, accesorios y autopartes compatibles con múltiples modelos y versiones, para que siempre encuentres una solución confiable y adecuada para tu vehículo.
         </p>
-        
-        {/* Mostrador de marcas */}
-        <div style={{ marginLeft: '10px', marginRight: '10px', marginTop: '1.5rem' }}>
-          {/* Desktop: 5 imágenes en línea horizontal */}
-          <div className="hidden md:grid" style={{ gridTemplateColumns: 'repeat(5, 1fr)', gap: '8px' }}>
-            {currentLogos.map((logo, index) => (
-              <img 
+
+        {/* Cinta caminadora de logos */}
+        <div
+          style={{
+            marginLeft: '10px',
+            marginRight: '10px',
+            marginTop: '1.5rem',
+            overflow: 'hidden'
+          }}
+        >
+          <style>{`
+            @keyframes brands-marquee {
+              from { transform: translateX(0); }
+              to   { transform: translateX(-50%); }
+            }
+          `}</style>
+
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              width: 'max-content',
+              animation: 'brands-marquee 35s linear infinite'
+            }}
+          >
+            {track.map((logo, index) => (
+              <img
                 key={index}
-                src={logo} 
-                alt={`Marca ${currentGroup * groupSize + index + 1}`}
+                src={logo}
+                alt={`Marca ${(index % logos.length) + 1}`}
                 style={{
-                  width: '100%',
-                  height: 'auto',
-                  objectFit: 'contain'
+                  height: '80px',
+                  width: 'auto',
+                  objectFit: 'contain',
+                  flexShrink: 0,
+                  marginRight: '40px'
                 }}
               />
             ))}
           </div>
-          
-          {/* Mobile: 2 arriba, 1 central, 2 abajo */}
-          <div className="md:hidden">
-            {/* 2 arriba */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '8px' }}>
-              {currentLogos.slice(0, 2).map((logo, index) => (
-                <img 
-                  key={index}
-                  src={logo} 
-                  alt={`Marca ${currentGroup * groupSize + index + 1}`}
-                  style={{
-                    width: '100%',
-                    height: 'auto',
-                    objectFit: 'contain'
-                  }}
-                />
-              ))}
-            </div>
-            
-            {/* 1 central con mismo alto que las otras */}
-            {currentLogos[2] && (
-              <div style={{ display: 'flex', justifyContent: 'center', marginTop: '8px' }}>
-                <img 
-                  src={currentLogos[2]} 
-                  alt={`Marca ${currentGroup * groupSize + 3}`}
-                  style={{
-                    width: '50%',
-                    height: 'auto',
-                    objectFit: 'contain'
-                  }}
-                />
-              </div>
-            )}
-            
-            {/* 2 abajo */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '8px', marginTop: '8px' }}>
-              {currentLogos.slice(3, 5).map((logo, index) => (
-                <img 
-                  key={index + 3}
-                  src={logo} 
-                  alt={`Marca ${currentGroup * groupSize + index + 4}`}
-                  style={{
-                    width: '100%',
-                    height: 'auto',
-                    objectFit: 'contain'
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-          
-          {/* Botonera de navegación */}
-          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', marginTop: '1.5rem' }}>
-            <button
-              onClick={goToPrevious}
-              disabled={currentGroup === 0}
-              style={{
-                backgroundColor: currentGroup === 0 ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.2)',
-                border: 'none',
-                borderRadius: '50%',
-                width: '40px',
-                height: '40px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: currentGroup === 0 ? 'not-allowed' : 'pointer',
-                color: currentGroup === 0 ? 'rgba(255, 255, 255, 0.4)' : 'white',
-                opacity: currentGroup === 0 ? 0.5 : 1
-              }}
-            >
-              <ChevronLeft size={24} />
-            </button>
-            
-            <span style={{ color: 'white', fontSize: '0.875rem' }}>
-              {currentGroup + 1} / {totalGroups}
-            </span>
-            
-            <button
-              onClick={goToNext}
-              disabled={currentGroup === totalGroups - 1}
-              style={{
-                backgroundColor: currentGroup === totalGroups - 1 ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.2)',
-                border: 'none',
-                borderRadius: '50%',
-                width: '40px',
-                height: '40px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                cursor: currentGroup === totalGroups - 1 ? 'not-allowed' : 'pointer',
-                color: currentGroup === totalGroups - 1 ? 'rgba(255, 255, 255, 0.4)' : 'white',
-                opacity: currentGroup === totalGroups - 1 ? 0.5 : 1
-              }}
-            >
-              <ChevronRight size={24} />
-            </button>
-          </div>
-          
-          {/* Párrafo con botón integrado */}
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.5rem', flexWrap: 'wrap', alignItems: 'center', gap: '0.5rem' }}>
-            <p style={{ fontStyle: 'italic', color: 'white', margin: 0, fontSize: '1rem' }}>
-              Para conocer nuestros productos, haga
-            </p>
-            <button
-              onClick={() => onNavigate('productos')}
-              style={{
-                backgroundColor: 'rgb(154, 113, 71)',
-                color: 'white',
-                padding: '0.5rem 1rem',
-                border: 'none',
-                cursor: 'pointer',
-                fontSize: '1rem',
-                fontFamily: 'Arial, sans-serif',
-                fontWeight: 'normal',
-                borderRadius: '5px',
-                textTransform: 'none',
-                transform: 'skewX(-10deg)',
-                transition: 'all 0.3s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgb(194, 143, 91)';
-                e.currentTarget.style.textTransform = 'uppercase';
-                e.currentTarget.style.transform = 'skewX(0deg)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgb(154, 113, 71)';
-                e.currentTarget.style.textTransform = 'none';
-                e.currentTarget.style.transform = 'skewX(-10deg)';
-              }}
-              onTouchStart={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgb(194, 143, 91)';
-                e.currentTarget.style.textTransform = 'uppercase';
-                e.currentTarget.style.transform = 'skewX(0deg)';
-              }}
-              onTouchEnd={(e) => {
-                e.currentTarget.style.backgroundColor = 'rgb(154, 113, 71)';
-                e.currentTarget.style.textTransform = 'none';
-                e.currentTarget.style.transform = 'skewX(-10deg)';
-              }}
-            >
-              click aquí
-            </button>
-          </div>
+        </div>
+
+        {/* Párrafo con botón integrado */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '1.5rem', flexWrap: 'wrap', alignItems: 'center', gap: '0.5rem' }}>
+          <p style={{ fontStyle: 'italic', color: 'white', margin: 0, fontSize: '1rem' }}>
+            Para conocer nuestros productos, haga
+          </p>
+          <button
+            onClick={() => onNavigate('productos')}
+            style={{
+              backgroundColor: 'rgb(154, 113, 71)',
+              color: 'white',
+              padding: '0.5rem 1rem',
+              border: 'none',
+              cursor: 'pointer',
+              fontSize: '1rem',
+              fontFamily: 'Arial, sans-serif',
+              fontWeight: 'normal',
+              borderRadius: '5px',
+              textTransform: 'none',
+              transform: 'skewX(-10deg)',
+              transition: 'all 0.3s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgb(194, 143, 91)';
+              e.currentTarget.style.textTransform = 'uppercase';
+              e.currentTarget.style.transform = 'skewX(0deg)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgb(154, 113, 71)';
+              e.currentTarget.style.textTransform = 'none';
+              e.currentTarget.style.transform = 'skewX(-10deg)';
+            }}
+            onTouchStart={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgb(194, 143, 91)';
+              e.currentTarget.style.textTransform = 'uppercase';
+              e.currentTarget.style.transform = 'skewX(0deg)';
+            }}
+            onTouchEnd={(e) => {
+              e.currentTarget.style.backgroundColor = 'rgb(154, 113, 71)';
+              e.currentTarget.style.textTransform = 'none';
+              e.currentTarget.style.transform = 'skewX(-10deg)';
+            }}
+          >
+            click aquí
+          </button>
         </div>
       </div>
     </section>

@@ -5,11 +5,13 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface ProductsSectionProps {
   onNavigate: (section: string, productId?: number) => void;
+  initialPage?: number;
+  onPageChange?: (page: number) => void;
 }
 
-export function ProductsSection({ onNavigate }: ProductsSectionProps) {
+export function ProductsSection({ onNavigate, initialPage = 1, onPageChange }: ProductsSectionProps) {
   const { theme } = useTheme();
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(initialPage);
   const itemsPerPage = 10;
 
   const totalPages = Math.ceil(products.length / itemsPerPage);
@@ -174,7 +176,11 @@ export function ProductsSection({ onNavigate }: ProductsSectionProps) {
         {totalPages > 1 && (
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: '1rem', marginTop: '2rem' }}>
             <button
-              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+              onClick={() => {
+                const next = Math.max(1, currentPage - 1);
+                setCurrentPage(next);
+                onPageChange?.(next);
+              }}
               disabled={currentPage === 1}
               style={{
                 backgroundColor: currentPage === 1 ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.2)',
@@ -208,7 +214,11 @@ export function ProductsSection({ onNavigate }: ProductsSectionProps) {
             </span>
 
             <button
-              onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+              onClick={() => {
+                const next = Math.min(totalPages, currentPage + 1);
+                setCurrentPage(next);
+                onPageChange?.(next);
+              }}
               disabled={currentPage === totalPages}
               style={{
                 backgroundColor: currentPage === totalPages ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255, 255, 255, 0.2)',

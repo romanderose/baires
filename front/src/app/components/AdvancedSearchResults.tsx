@@ -287,18 +287,48 @@ export function AdvancedSearchResults({ onNavigate, filters }: AdvancedSearchRes
             )}
           </>
         ) : (
-          <p 
-            style={{ 
-              fontFamily: 'Arial, sans-serif',
-              fontSize: '1.25rem',
-              color: 'white',
-              textAlign: 'center',
-              padding: '2rem',
-              margin: 0
-            }}
-          >
-            No se encontraron productos que coincidan con los criterios de búsqueda.
-          </p>
+          <div style={{ 
+            display: 'flex', 
+            flexDirection: 'column', 
+            alignItems: 'center',
+            justifyContent: 'center',
+            minHeight: '400px',
+            gap: '1rem'
+          }}>
+            <div style={{ 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              width: '100%',
+              paddingLeft: '1rem',
+              paddingRight: '1rem'
+            }}>
+              <img 
+                src="https://images.unsplash.com/photo-1599523170027-ee188424e94d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxicm9rZW4lMjBkb3duJTIwY2FyJTIwc2FkJTIwZW1wdHklMjByb2FkfGVufDF8fHx8MTc3ODA5MjM1MXww&ixlib=rb-4.1.0&q=80&w=1080"
+                alt="auto triste"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                }}
+                className="max-w-[280px] md:max-w-[300px]"
+                style={{ 
+                  width: '100%',
+                  height: 'auto',
+                  borderRadius: '8px'
+                }} 
+              />
+            </div>
+            <p 
+              style={{ 
+                fontFamily: 'Arial, sans-serif',
+                fontStyle: 'italic',
+                color: 'white',
+                fontSize: '1rem',
+                textAlign: 'center'
+              }}
+            >
+              No se encontraron productos que coincidan con los criterios de búsqueda.
+            </p>
+          </div>
         )}
       </div>
     </section>

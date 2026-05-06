@@ -25,7 +25,7 @@ function MainContent() {
   const initialSearchTerm = searchParams.get('search') || '';
   const isAdvancedSearch = searchParams.get('advanced') === 'true';
   const initialSection = searchParams.get('section') || '';
-
+  
   // Obtener filtros de búsqueda avanzada
   const advancedFilters = {
     nombre: searchParams.get('nombre') || undefined,
@@ -42,7 +42,8 @@ function MainContent() {
   const [searchTerm, setSearchTerm] = useState<string>(initialSearchTerm);
   const [selectedProductId, setSelectedProductId] = useState<number | null>(null);
   const [previousSection, setPreviousSection] = useState<string>('home');
-
+  const [productsPage, setProductsPage] = useState<number>(1);
+  
   // Mostrar splash solo si NO hay búsqueda inicial ni sección inicial
   const [showSplash, setShowSplash] = useState(!initialSearchTerm && !isAdvancedSearch && !initialSection);
 
@@ -61,15 +62,15 @@ function MainContent() {
     setSelectedProductId(null);
     setSearchTerm('');
     setShowSplash(true);
-    window.history.pushState({}, '', window.location.pathname);
+    window.history.pushState({}, '', '/');
   };
 
   const handleNavigate = (section: string, productId?: number) => {
     // Limpiar parámetro de búsqueda de la URL cuando se navega
     if (window.location.search) {
-      window.history.pushState({}, '', window.location.pathname);
+      window.history.pushState({}, '', '/');
     }
-
+    
     if ((section === 'producto-detalle' || section === 'producto') && productId) {
       setPreviousSection(currentSection);
       setSelectedProductId(productId);
@@ -90,8 +91,8 @@ function MainContent() {
   }
 
   return (
-    <div
-      style={{
+    <div 
+      style={{ 
         position: 'fixed',
         top: 0,
         left: 0,
@@ -104,8 +105,8 @@ function MainContent() {
     >
       <div style={{ width: '100%', height: '100%', overflowY: 'auto', backgroundColor: theme === 'dark' ? 'rgb(20, 45, 110)' : 'rgb(0, 161, 255)' }}>
         <MainMenu onLogoClick={resetToHome} onNavigate={handleNavigate} />
-        <div
-          style={{
+        <div 
+          style={{ 
             backgroundColor: theme === 'dark' ? 'rgb(20, 45, 110)' : 'rgb(0, 161, 255)'
           }}
         >
@@ -118,7 +119,7 @@ function MainContent() {
           ) : currentSection === 'carrito' ? (
             <CartSection />
           ) : currentSection === 'productos' ? (
-            <ProductsSection onNavigate={handleNavigate} />
+            <ProductsSection onNavigate={handleNavigate} initialPage={productsPage} onPageChange={setProductsPage} />
           ) : currentSection === 'frenos' ? (
             <CategorySection category="Frenos" onNavigate={handleNavigate} />
           ) : currentSection === 'embragues' ? (

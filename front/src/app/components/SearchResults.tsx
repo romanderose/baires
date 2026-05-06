@@ -272,12 +272,16 @@ export function SearchResults({ searchTerm, onNavigate }: SearchResultsProps) {
               paddingRight: '1rem'
             }}>
               <img 
-                src={noResultsImage} 
-                alt="Sin resultados" 
+                src="https://images.unsplash.com/photo-1599523170027-ee188424e94d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxicm9rZW4lMjBkb3duJTIwY2FyJTIwc2FkJTIwZW1wdHklMjByb2FkfGVufDF8fHx8MTc3ODA5MjM1MXww&ixlib=rb-4.1.0&q=80&w=1080"
+                alt="auto triste"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                }}
                 className="max-w-[280px] md:max-w-[300px]"
                 style={{ 
                   width: '100%',
-                  height: 'auto'
+                  height: 'auto',
+                  borderRadius: '8px'
                 }} 
               />
             </div>
